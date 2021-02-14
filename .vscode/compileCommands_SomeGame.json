@@ -1,0 +1,47 @@
+[
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\SomeGame.Build.cs",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\SomeGame.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\SomeGame.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\SomeGameCharacter.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\SomeGameCharacter.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\SomeGameGameMode.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\SomeGameGameMode.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\TestActor.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\TestActor.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.182.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	}
+]
