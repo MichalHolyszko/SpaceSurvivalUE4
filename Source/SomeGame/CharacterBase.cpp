@@ -15,7 +15,7 @@ ACharacterBase::ACharacterBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-		// Set size for collision capsule
+	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// set our turn rates for input
@@ -43,14 +43,18 @@ ACharacterBase::ACharacterBase()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
-
+	
+	// Initialize Movement Speed variables
+	NormalSpeed = 600.f;
+	SprintSpeed = 1200.f;
 }
 
 // Called when the game starts or when spawned
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	MovementComponent = GetCharacterMovement();
 }
 
 // Called every frame
@@ -76,6 +80,8 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
+	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint);
 }
 
 void ACharacterBase::MoveForward(float Value)
@@ -106,4 +112,22 @@ void ACharacterBase::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
+void ACharacterBase::Sprint()
+{
+	if(MovementComponent != nullptr)
+	{
+		if(MovementComponent->MaxWalkSpeed != SprintSpeed)
+		{
+			MovementComponent->MaxWalkSpeed = SprintSpeed;
+		}
+		else
+		{
+			MovementComponent->MaxWalkSpeed = NormalSpeed;
+		}
+
+		UE_LOG(LogTemp, Warning, TEXT("Speed: %f"), MovementComponent->MaxWalkSpeed);
+	}
+}
+
 

@@ -39,6 +39,19 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+private:
+
+	// Default Movement Speed
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float NormalSpeed;
+
+	// Movement Speed when sprinting
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float SprintSpeed;
+
+	UPROPERTY()
+	UCharacterMovementComponent* MovementComponent;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -52,5 +65,7 @@ protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
+
+	void Sprint();
 
 };
