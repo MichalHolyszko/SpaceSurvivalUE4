@@ -39,6 +39,14 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	UFUNCTION(BlueprintCallable)
+	void TryToDealDamage();
+
+	void MeleeAttack();
+
+	UPROPERTY()
+	TArray<AActor*> ActorsToIgnore;
+
 private:
 
 	// Default Movement Speed
@@ -51,6 +59,9 @@ private:
 
 	UPROPERTY()
 	UCharacterMovementComponent* MovementComponent;
+
+	UPROPERTY(EditDefaultsOnly)
+	class UAnimMontage* MeleeAttackMontage;
 
 protected:
 	// Called when the game starts or when spawned
@@ -67,4 +78,7 @@ protected:
 	// End of APawn interface
 
 	void Sprint();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UAIPerceptionStimuliSourceComponent* StimuliComponent;
 };

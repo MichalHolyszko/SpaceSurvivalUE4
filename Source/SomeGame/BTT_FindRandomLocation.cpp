@@ -17,7 +17,6 @@ EBTNodeResult::Type UBTT_FindRandomLocation::ExecuteTask(UBehaviorTreeComponent&
     FVector Origin = OwnerComp.GetOwner()->GetActorLocation();
     FVector TargetLocation = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), Origin, 1000.f);
 
-    UE_LOG(LogTemp, Warning, TEXT("%s"), *TargetLocation.ToString());
     OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), TargetLocation);
 
     return EBTNodeResult::Succeeded;

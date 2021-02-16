@@ -1,5 +1,15 @@
 [
 	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_FindPlayerLocation.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_FindPlayerLocation.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
 		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_FindRandomLocation.cpp",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
@@ -26,6 +36,16 @@
 	},
 	{
 		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\EnemyAIController.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\EnemyBase.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\EnemyBase.h",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},

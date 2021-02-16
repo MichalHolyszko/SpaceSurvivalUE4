@@ -10,6 +10,16 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Damage.h"
+
+#include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
+
+#include "Animation/AnimInstance.h"
+
+#include "Engine/EngineTypes.h"
+
 // Sets default values
 ACharacterBase::ACharacterBase()
 {
@@ -48,6 +58,8 @@ ACharacterBase::ACharacterBase()
 	// Initialize Movement Speed variables
 	NormalSpeed = 600.f;
 	SprintSpeed = 1200.f;
+
+	StimuliComponent = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("AIPerceptionStimuliSourceComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -83,6 +95,7 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint);
+	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ACharacterBase::MeleeAttack);
 }
 
 void ACharacterBase::MoveForward(float Value)
@@ -125,9 +138,30 @@ void ACharacterBase::Sprint()
 		else
 		{
 			MovementComponent->MaxWalkSpeed = NormalSpeed;
+
 		}
 
 		UE_LOG(LogTemp, Warning, TEXT("Speed: %f"), MovementComponent->MaxWalkSpeed);
+	}
+}
+
+void ACharacterBase::MeleeAttack()
+{
+	GetMesh()->GetAnimInstance()->Montage_Play(MeleeAttackMontage);
+}
+
+void ACharacterBase::TryToDealDamage()
+{
+	FVector TraceStart = GetMesh()->GetSocketLocation(TEXT("HandSocket")); 
+	FVector Direction = UKismetMathLibrary::GetForwardVector(GetActorRotation());
+	FVector TraceEnd = TraceStart + Direction * 100.f;
+	FHitResult HitResult;
+
+	bool bIsHit = UKismetSystemLibrary::SphereTraceSingle(GetWorld(), TraceStart, TraceEnd, 25.f, ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResult, true);
+
+	if(bIsHit)
+	{
+		UAISense_Damage::ReportDamageEvent(GetWorld(), HitResult.GetActor(), this, 0, HitResult.Location, HitResult.Location);
 	}
 }
 
