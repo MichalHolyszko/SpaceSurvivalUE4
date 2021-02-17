@@ -14,10 +14,8 @@
  UENUM(BlueprintType)
  enum class EEnemyStatus : uint8 
  {
-	  Patrolling,
-	  Chasing,
-	  Attacking,
-	  Recovering
+	  Patrol,
+	  Combat
  };
 
 /**
@@ -34,6 +32,8 @@ public:
 
 	UFUNCTION()
 	void TargetPerceptionInfoUpdated(const FActorPerceptionUpdateInfo &UpdateInfo);
+
+	void SetEnemyStatus(EEnemyStatus EnemyStatusToSet);
 
 protected:
 	// Called when the game starts or when spawned

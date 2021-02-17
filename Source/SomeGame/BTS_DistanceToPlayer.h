@@ -19,9 +19,6 @@ public:
 	UBTS_DistanceToPlayer();
 
 	UPROPERTY(EditAnywhere)
-	FBlackboardKeySelector BB_PlayerLocation;
-
-	UPROPERTY(EditAnywhere)
 	FBlackboardKeySelector BB_DistanceToPlayer;
 
 protected:

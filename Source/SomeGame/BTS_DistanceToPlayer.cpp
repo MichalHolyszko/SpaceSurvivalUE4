@@ -3,7 +3,8 @@
 #include "BTS_DistanceToPlayer.h"
 
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
+#include "AIController.h"
 
 UBTS_DistanceToPlayer::UBTS_DistanceToPlayer()
 {
@@ -14,9 +15,7 @@ void UBTS_DistanceToPlayer::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* N
 {
     Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
-    FVector PlayerLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(BB_PlayerLocation.SelectedKeyName);
-    FVector OwnerLocation = OwnerComp.GetOwner()->GetActorLocation();
-    float DistanceToPlayer = UKismetMathLibrary::Vector_Distance(PlayerLocation, OwnerLocation); 
-
+    OwnerComp.GetBlackboardComponent()->ClearValue(BB_DistanceToPlayer.SelectedKeyName);
+    float DistanceToPlayer = OwnerComp.GetAIOwner()->GetPawn()->GetDistanceTo(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
     OwnerComp.GetBlackboardComponent()->SetValueAsFloat(BB_DistanceToPlayer.SelectedKeyName, DistanceToPlayer);
 }

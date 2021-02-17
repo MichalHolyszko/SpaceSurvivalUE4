@@ -22,5 +22,10 @@ void AEnemyBase::Tick(float DeltaTime)
 
 }
 
+void AEnemyBase::Attack()
+{
+	UE_LOG(LogTemp, Error, TEXT("Enemy ATTACK!"));
+}
+
 
 

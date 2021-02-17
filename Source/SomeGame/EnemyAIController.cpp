@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "EnemyAIController.h"
+
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
@@ -14,7 +15,7 @@ void AEnemyAIController::BeginPlay()
 {
     Super::BeginPlay();
 
-    EnemyStatusEnum = EEnemyStatus::Patrolling;
+    EnemyStatusEnum = EEnemyStatus::Patrol;
 
     if(BehaviorTree != nullptr)
     {
@@ -28,9 +29,14 @@ void AEnemyAIController::TargetPerceptionInfoUpdated(const FActorPerceptionUpdat
 {
     if(UpdateInfo.Stimulus.WasSuccessfullySensed())
     {
-        EnemyStatusEnum = EEnemyStatus::Chasing;
+        EnemyStatusEnum = EEnemyStatus::Combat;
 
         GetBlackboardComponent()->SetValueAsEnum(TEXT("EnemyStatus"), (int8)EnemyStatusEnum);
     }
+}
+
+void AEnemyAIController::SetEnemyStatus(EEnemyStatus EnemyStatusToSet)
+{
+    EnemyStatusEnum = EnemyStatusToSet;
 }
 

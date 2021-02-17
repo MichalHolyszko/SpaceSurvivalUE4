@@ -14,4 +14,11 @@ class SOMEGAME_API UBTT_Attack : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
 	
+public:
+
+	UBTT_Attack();
+
+protected:
+
+	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };
