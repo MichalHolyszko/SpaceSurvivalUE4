@@ -14,8 +14,16 @@ EBTNodeResult::Type UBTT_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, 
 {
     Super::ExecuteTask(OwnerComp,NodeMemory);
    
-   Cast<AEnemyBase>(OwnerComp.GetAIOwner()->GetPawn())->Attack();
+    AEnemyBase* OwnerPawn =  Cast<AEnemyBase>(OwnerComp.GetAIOwner()->GetPawn());
 
-    return EBTNodeResult::Succeeded;
+    if(OwnerPawn != nullptr)
+    {
+        OwnerPawn->Attack();
+        return EBTNodeResult::Succeeded;
+    }
+    else
+    {
+        return EBTNodeResult::Failed; 
+    }
 }
 

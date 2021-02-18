@@ -12,12 +12,9 @@
 
 #include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Damage.h"
-
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
-
 #include "Animation/AnimInstance.h"
-
 #include "Engine/EngineTypes.h"
 
 // Sets default values
@@ -58,7 +55,8 @@ ACharacterBase::ACharacterBase()
 	// Initialize Movement Speed variables
 	NormalSpeed = 600.f;
 	SprintSpeed = 1200.f;
-
+	
+	// Initialize Stimuli Source Component
 	StimuliComponent = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("AIPerceptionStimuliSourceComponent"));
 }
 
@@ -140,14 +138,15 @@ void ACharacterBase::Sprint()
 			MovementComponent->MaxWalkSpeed = NormalSpeed;
 
 		}
-
-		UE_LOG(LogTemp, Warning, TEXT("Speed: %f"), MovementComponent->MaxWalkSpeed);
 	}
 }
 
 void ACharacterBase::MeleeAttack()
 {
-	GetMesh()->GetAnimInstance()->Montage_Play(MeleeAttackMontage);
+	if(MeleeAttackMontage != nullptr)
+	{
+		GetMesh()->GetAnimInstance()->Montage_Play(MeleeAttackMontage);
+	}
 }
 
 void ACharacterBase::TryToDealDamage()

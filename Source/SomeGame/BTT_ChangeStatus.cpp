@@ -13,9 +13,17 @@ EBTNodeResult::Type UBTT_ChangeStatus::ExecuteTask(UBehaviorTreeComponent& Owner
 {
     Super::ExecuteTask(OwnerComp, NodeMemory);
 
-    Cast<AEnemyAIController>(OwnerComp.GetAIOwner())->SetEnemyStatus(NewStatus);
-    OwnerComp.GetBlackboardComponent()->SetValueAsEnum(BB_ActualStatus.SelectedKeyName, (uint8)NewStatus);
+    AEnemyAIController* AIController = Cast<AEnemyAIController>(OwnerComp.GetAIOwner());
 
-    return EBTNodeResult::Succeeded;
+    if(AIController != nullptr)
+    {
+        AIController->SetEnemyStatus(NewStatus);
+        OwnerComp.GetBlackboardComponent()->SetValueAsEnum(BB_ActualStatus.SelectedKeyName, (uint8)NewStatus);
+        return EBTNodeResult::Succeeded;
+    }
+    else
+    {
+         return EBTNodeResult::Failed;
+    }
 }
 

@@ -12,6 +12,10 @@ AEnemyBase::AEnemyBase()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Initialize Attack Range variable
+	AttackRange = 200.f;
+
 }
 // Called when the game starts or when spawned
 void AEnemyBase::BeginPlay()
@@ -29,9 +33,11 @@ void AEnemyBase::Tick(float DeltaTime)
 
 void AEnemyBase::Attack()
 {
-	GetMesh()->GetAnimInstance()->Montage_Play(AttackMontage);
-
-	UE_LOG(LogTemp, Error, TEXT("Enemy ATTACK!"));
+	if(AttackMontage != nullptr)
+	{
+		GetMesh()->GetAnimInstance()->Montage_Play(AttackMontage);
+		UE_LOG(LogTemp, Error, TEXT("Enemy ATTACK!"));
+	}
 }
 
 float AEnemyBase::GetAttackRange() const
@@ -39,7 +45,7 @@ float AEnemyBase::GetAttackRange() const
 	return AttackRange;
 }
 
-void AEnemyBase::TraceToHit()
+void AEnemyBase::TryToDealDamage()
 {
 	FVector TraceStart = GetMesh()->GetSocketLocation(TEXT("HandSocket")); 
 	FVector Direction = UKismetMathLibrary::GetForwardVector(GetActorRotation());

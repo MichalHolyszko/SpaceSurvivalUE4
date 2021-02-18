@@ -24,9 +24,12 @@ void AEnemyAIController::BeginPlay()
 
         float AttackRange = Cast<AEnemyBase>(GetPawn())->GetAttackRange();
         GetBlackboardComponent()->SetValueAsFloat(TEXT("AttackRange"), AttackRange);
-    }
 
-    PerceptionComponent->OnTargetPerceptionInfoUpdated.AddDynamic(this, &AEnemyAIController::TargetPerceptionInfoUpdated);
+        if(PerceptionComponent != nullptr)
+        {
+            PerceptionComponent->OnTargetPerceptionInfoUpdated.AddDynamic(this, &AEnemyAIController::TargetPerceptionInfoUpdated);
+        }
+    }
 }
 
 void AEnemyAIController::TargetPerceptionInfoUpdated(const FActorPerceptionUpdateInfo &UpdateInfo)
@@ -34,7 +37,6 @@ void AEnemyAIController::TargetPerceptionInfoUpdated(const FActorPerceptionUpdat
     if(UpdateInfo.Stimulus.WasSuccessfullySensed())
     {
         EnemyStatusEnum = EEnemyStatus::Combat;
-
         GetBlackboardComponent()->SetValueAsEnum(TEXT("EnemyStatus"), (int8)EnemyStatusEnum);
     }
 }

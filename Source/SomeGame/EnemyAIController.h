@@ -30,18 +30,22 @@ public:
 
 	AEnemyAIController();
 
+	// Called when perception is changed i.e when Damage was Sensed
 	UFUNCTION()
 	void TargetPerceptionInfoUpdated(const FActorPerceptionUpdateInfo &UpdateInfo);
 
+	// Called to change enemy status
 	void SetEnemyStatus(EEnemyStatus EnemyStatusToSet);
 
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly, Category = "BehaviorTree")
 	class UBehaviorTree* BehaviorTree; 
 
+	// Enemy Status needed to do different behaviors i.e Patrol or Combat
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
 	EEnemyStatus EnemyStatusEnum;
 

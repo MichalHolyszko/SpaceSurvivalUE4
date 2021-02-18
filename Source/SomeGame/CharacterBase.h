@@ -39,13 +39,12 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	// Called By Anim Montage To Fire Sphere Trace
 	UFUNCTION(BlueprintCallable)
 	void TryToDealDamage();
 
+	// Called by Player to execute melle attack
 	void MeleeAttack();
-
-	UPROPERTY()
-	TArray<AActor*> ActorsToIgnore;
 
 private:
 
@@ -57,11 +56,14 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float SprintSpeed;
 
-	UPROPERTY()
-	UCharacterMovementComponent* MovementComponent;
-
 	UPROPERTY(EditDefaultsOnly,  Category = "Anims")
 	class UAnimMontage* MeleeAttackMontage;
+
+	UPROPERTY()
+	TArray<AActor*> ActorsToIgnore;
+
+	UPROPERTY()
+	UCharacterMovementComponent* MovementComponent;
 
 protected:
 	// Called when the game starts or when spawned
@@ -77,6 +79,7 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
 
+	// Called for Increase Character Movement Speed
 	void Sprint();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
