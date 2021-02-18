@@ -10,12 +10,12 @@
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},
 	{
-		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTS_DistanceToPlayer.cpp",
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTS_IsPlayerInAttackRange.cpp",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},
 	{
-		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTS_DistanceToPlayer.h",
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTS_IsPlayerInAttackRange.h",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},
@@ -30,12 +30,32 @@
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},
 	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_ChangeSpeed.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_ChangeSpeed.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
 		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_ChangeStatus.cpp",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},
 	{
 		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_ChangeStatus.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_FindLocationAroundPlayer.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\BTT_FindLocationAroundPlayer.h",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},

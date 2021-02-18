@@ -60,7 +60,7 @@ private:
 	UPROPERTY()
 	UCharacterMovementComponent* MovementComponent;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly,  Category = "Anims")
 	class UAnimMontage* MeleeAttackMontage;
 
 protected:

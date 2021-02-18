@@ -3,17 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
+#include "BehaviorTree/BTTaskNode.h"
 #include "BTT_Attack.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class SOMEGAME_API UBTT_Attack : public UBTTask_BlackboardBase
+class SOMEGAME_API UBTT_Attack : public UBTTaskNode
 {
 	GENERATED_BODY()
-	
+
 public:
 
 	UBTT_Attack();
@@ -21,4 +21,6 @@ public:
 protected:
 
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+	
 };

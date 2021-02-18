@@ -15,11 +15,26 @@ public:
 	// Sets default values for this character's properties
 	AEnemyBase();
 
-	public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	void Attack();
+
+	UFUNCTION(BlueprintCallable)
+	void TraceToHit();
+
+	float GetAttackRange() const;
+
+	UPROPERTY()
+	TArray<AActor*> ActorsToIgnore;
+
+private:
+
+	UPROPERTY(EditDefaultsOnly, Category = "Anims")
+	class UAnimMontage* AttackMontage;
+
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float AttackRange;
 
 protected:
 	// Called when the game starts or when spawned

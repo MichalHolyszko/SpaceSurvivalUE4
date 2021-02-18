@@ -3,6 +3,7 @@
 #include "BTT_Attack.h"
 
 #include "EnemyBase.h"
+#include "AIController.h"
 
 UBTT_Attack::UBTT_Attack()
 {
@@ -13,7 +14,8 @@ EBTNodeResult::Type UBTT_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, 
 {
     Super::ExecuteTask(OwnerComp,NodeMemory);
    
-   Cast<AEnemyBase>(OwnerComp.GetOwner())->Attack();
+   Cast<AEnemyBase>(OwnerComp.GetAIOwner()->GetPawn())->Attack();
 
     return EBTNodeResult::Succeeded;
 }
+
