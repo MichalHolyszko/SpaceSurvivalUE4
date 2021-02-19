@@ -27,8 +27,6 @@ void UBTS_IsPlayerInAttackRange::TickNode(UBehaviorTreeComponent& OwnerComp, uin
 {
     Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
-    //CombatComponent = Cast<UAICombatComponent>(OwnerComp.GetBlackboardComponent()->GetValueAsObject(GetSelectedBlackboardKey()));
-    
     if(CombatComponent != nullptr && MyPawn != nullptr)
     {
         float DistanceToPlayer = MyPawn->GetDistanceTo(PlayerPawn);

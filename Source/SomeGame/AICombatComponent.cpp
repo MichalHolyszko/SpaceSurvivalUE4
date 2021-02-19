@@ -25,10 +25,10 @@ void UAICombatComponent::BeginPlay()
 	Super::BeginPlay();
 
 	OwnerMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+	ActorsToIgnore.Add(GetOwner());
 
 	if(OwnerMesh != nullptr)
 	{
-		ActorsToIgnore.Add(GetOwner());
 		OwnerMesh->GetAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &UAICombatComponent::TryToDealDamage);
 	}
 }

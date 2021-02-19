@@ -110,6 +110,16 @@
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},
 	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\CombatComponent.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\CombatComponent.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
 		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\EnemyAIController.cpp",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
@@ -126,6 +136,16 @@
 	},
 	{
 		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\EnemyBase.h",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\HealthComponent.cpp",
+		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
+		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
+	},
+	{
+		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\HealthComponent.h",
 		"command": "\"\"cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},

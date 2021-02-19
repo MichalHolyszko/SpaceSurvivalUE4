@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CharacterBase.h"
+#include "CombatComponent.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -9,13 +10,6 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
-
-#include "Perception/AIPerceptionStimuliSourceComponent.h"
-#include "Perception/AISense_Damage.h"
-#include "Kismet/KismetSystemLibrary.h"
-#include "Kismet/KismetMathLibrary.h"
-#include "Animation/AnimInstance.h"
-#include "Engine/EngineTypes.h"
 
 // Sets default values
 ACharacterBase::ACharacterBase()
@@ -52,12 +46,12 @@ ACharacterBase::ACharacterBase()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 	
-	// Initialize Movement Speed variables
+	// Initialize Components
+	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
+
+	// Initialize variables
 	NormalSpeed = 600.f;
 	SprintSpeed = 1200.f;
-	
-	// Initialize Stimuli Source Component
-	StimuliComponent = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("AIPerceptionStimuliSourceComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -66,8 +60,6 @@ void ACharacterBase::BeginPlay()
 	Super::BeginPlay();
 
 	MovementComponent = GetCharacterMovement();
-
-	GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &ACharacterBase::TryToDealDamage);
 }
 
 // Called every frame
@@ -95,7 +87,10 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint);
-	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ACharacterBase::MeleeAttack);
+	if(CombatComponent != nullptr)
+	{
+		PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack);
+	}
 }
 
 void ACharacterBase::MoveForward(float Value)
@@ -143,27 +138,5 @@ void ACharacterBase::Sprint()
 	}
 }
 
-void ACharacterBase::MeleeAttack()
-{
-	if(MeleeAttackMontage != nullptr)
-	{
-		GetMesh()->GetAnimInstance()->Montage_Play(MeleeAttackMontage);
-	}
-}
-
-void ACharacterBase::TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
-{
-	FVector TraceStart = GetMesh()->GetSocketLocation(TEXT("HandSocket")); 
-	FVector Direction = UKismetMathLibrary::GetForwardVector(GetActorRotation());
-	FVector TraceEnd = TraceStart + Direction * 100.f;
-	FHitResult HitResult;
-
-	bool bIsHit = UKismetSystemLibrary::SphereTraceSingle(GetWorld(), TraceStart, TraceEnd, 25.f, ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResult, true);
-
-	if(bIsHit)
-	{
-		UAISense_Damage::ReportDamageEvent(GetWorld(), HitResult.GetActor(), this, 0, HitResult.Location, HitResult.Location);
-	}
-}
 
 

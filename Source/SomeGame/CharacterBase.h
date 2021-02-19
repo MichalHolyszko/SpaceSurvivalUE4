@@ -39,13 +39,6 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-	// Called By Anim Montage To Fire Sphere Trace
-	UFUNCTION()
-	void TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
-
-	// Called by Player to execute melle attack
-	void MeleeAttack();
-
 private:
 
 	// Default Movement Speed
@@ -55,12 +48,6 @@ private:
 	// Movement Speed when sprinting
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float SprintSpeed;
-
-	UPROPERTY(EditDefaultsOnly,  Category = "Anims")
-	class UAnimMontage* MeleeAttackMontage;
-
-	UPROPERTY()
-	TArray<AActor*> ActorsToIgnore;
 
 	UPROPERTY()
 	UCharacterMovementComponent* MovementComponent;
@@ -83,5 +70,5 @@ protected:
 	void Sprint();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	class UAIPerceptionStimuliSourceComponent* StimuliComponent;
+	class UCombatComponent* CombatComponent;
 };
