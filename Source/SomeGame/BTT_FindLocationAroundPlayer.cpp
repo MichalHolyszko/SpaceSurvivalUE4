@@ -21,11 +21,11 @@ EBTNodeResult::Type UBTT_FindLocationAroundPlayer::ExecuteTask(UBehaviorTreeComp
 
     FVector PlayerLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(BB_PlayerLocation.SelectedKeyName);
     FVector OwnerLocation = OwnerComp.GetAIOwner()->GetPawn()->GetActorLocation();
-    FVector ConeDirection = UKismetMathLibrary::GetDirectionUnitVector(PlayerLocation, OwnerLocation);
 
+    FVector ConeDirection = UKismetMathLibrary::GetDirectionUnitVector(PlayerLocation, OwnerLocation);
     FVector UnitVectorInCone = UKismetMathLibrary::RandomUnitVectorInConeInDegrees(ConeDirection, 60);
-    float Range = OwnerComp.GetBlackboardComponent()->GetValueAsFloat(BB_Range.SelectedKeyName);
-    FVector Origin = UnitVectorInCone * Range + PlayerLocation;
+    
+    FVector Origin = UnitVectorInCone * DistanceFromPlayer + PlayerLocation;
 
     FVector TempLocation = UNavigationSystemV1::GetRandomReachablePointInRadius(GetWorld(), Origin, 50); 
     OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), TempLocation);

@@ -18,6 +18,11 @@ public:
 
 	UBTT_Attack();
 
+private:
+
+	UPROPERTY()
+	class UAICombatComponent* CombatComponent;
+
 protected:
 
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;

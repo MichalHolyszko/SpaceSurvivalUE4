@@ -51,5 +51,4 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UAIPerceptionComponent* AIPerceptionComponent;
-
 };

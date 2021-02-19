@@ -22,7 +22,7 @@ public:
 	FBlackboardKeySelector BB_PlayerLocation;
 
 	UPROPERTY(EditAnywhere)
-	FBlackboardKeySelector BB_Range;
+	float DistanceFromPlayer = 100.f;
 
 protected:
 

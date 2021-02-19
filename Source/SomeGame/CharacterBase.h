@@ -40,8 +40,8 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	// Called By Anim Montage To Fire Sphere Trace
-	UFUNCTION(BlueprintCallable)
-	void TryToDealDamage();
+	UFUNCTION()
+	void TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
 
 	// Called by Player to execute melle attack
 	void MeleeAttack();

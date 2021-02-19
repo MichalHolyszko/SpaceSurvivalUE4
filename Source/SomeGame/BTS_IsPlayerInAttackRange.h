@@ -18,11 +18,20 @@ public:
 
 	UBTS_IsPlayerInAttackRange();
 
-	UPROPERTY(EditAnywhere)
-	FBlackboardKeySelector BB_OwnerRange;
+private:
+
+	UPROPERTY()
+	class APawn* MyPawn;
+
+	UPROPERTY()
+	class APawn* PlayerPawn;
+
+	UPROPERTY()
+	class UAICombatComponent* CombatComponent;
 
 protected:
 
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 	
+	virtual void OnSearchStart(FBehaviorTreeSearchData& SearchData) override;
 };

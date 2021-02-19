@@ -66,6 +66,8 @@ void ACharacterBase::BeginPlay()
 	Super::BeginPlay();
 
 	MovementComponent = GetCharacterMovement();
+
+	GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &ACharacterBase::TryToDealDamage);
 }
 
 // Called every frame
@@ -149,7 +151,7 @@ void ACharacterBase::MeleeAttack()
 	}
 }
 
-void ACharacterBase::TryToDealDamage()
+void ACharacterBase::TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
 	FVector TraceStart = GetMesh()->GetSocketLocation(TEXT("HandSocket")); 
 	FVector Direction = UKismetMathLibrary::GetForwardVector(GetActorRotation());
