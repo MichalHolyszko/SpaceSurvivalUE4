@@ -39,6 +39,9 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	UFUNCTION()
+	void HandleDeath();
+
 private:
 
 	// Default Movement Speed

@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDeathDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SOMEGAME_API UHealthComponent : public UActorComponent
@@ -19,16 +20,19 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	// UFUNCTION(BlueprintCallable)
-	// float GetHealthPercent() const;
+	UFUNCTION(BlueprintCallable)
+	float GetHealthPercent() const;
 
-	// float GetGealth() const ;
+	float GetActualHealth() const ;
 
 	UFUNCTION()
 	virtual void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 
 	UFUNCTION(BlueprintCallable)
 	bool IsDead() const;
+
+	UPROPERTY()
+	FOnDeathDelegate OnDeath;
 
 private:
 

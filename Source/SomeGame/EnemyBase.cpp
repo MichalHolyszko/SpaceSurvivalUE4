@@ -19,13 +19,22 @@ void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-}
+	if(HealthComponent != nullptr)
+	{
+		HealthComponent->OnDeath.AddDynamic(this, &AEnemyBase::HandleDeath);
+	}
+}	
 
 // Called every frame
 void AEnemyBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AEnemyBase::HandleDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Enemy Death"));
 }
 
 

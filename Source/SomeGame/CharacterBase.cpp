@@ -62,6 +62,11 @@ void ACharacterBase::BeginPlay()
 	Super::BeginPlay();
 
 	MovementComponent = GetCharacterMovement();
+
+	if(HealthComponent != nullptr)
+	{
+		HealthComponent->OnDeath.AddDynamic(this, &ACharacterBase::HandleDeath);
+	}
 }
 
 // Called every frame
@@ -138,6 +143,11 @@ void ACharacterBase::Sprint()
 
 		}
 	}
+}
+
+void ACharacterBase::HandleDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Player Death"));
 }
 
 

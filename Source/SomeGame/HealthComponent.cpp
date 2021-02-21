@@ -28,7 +28,6 @@ void UHealthComponent::BeginPlay()
 void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 }
 
 void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser )
@@ -40,6 +39,8 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const clas
 	if(ActualHealth <= 0.f)
 	{
 		UE_LOG(LogTemp, Error, TEXT("I'M DEAD!"), ActualHealth);
+
+		OnDeath.Broadcast();
 	}
 }
 
@@ -47,4 +48,17 @@ bool UHealthComponent::IsDead() const
 {
 	return ActualHealth <= 0.f;
 }
+
+float UHealthComponent::GetHealthPercent() const
+{
+	// !!! Max Health must be != 0 (dividing by 0) 
+	return ActualHealth / MaxHealth;
+}
+
+float UHealthComponent::GetActualHealth() const
+{
+	return ActualHealth;
+}
+
+
 

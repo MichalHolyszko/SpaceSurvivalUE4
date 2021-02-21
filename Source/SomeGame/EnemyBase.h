@@ -18,6 +18,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+	void HandleDeath();
+
 protected:
 
 	// Called when the game starts or when spawned
@@ -28,5 +31,4 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UHealthComponent* HealthComponent;
-
 };
