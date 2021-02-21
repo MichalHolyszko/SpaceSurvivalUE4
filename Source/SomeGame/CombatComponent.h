@@ -28,17 +28,31 @@ public:
 
 private:
 
+	// Character Damage Per Hit
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float Damage;
+
+	// Character Attack Range
 	UPROPERTY(EditAnywhere, Category = "Stats")
 	float AttackRange;
 
+	// Character Attack Range
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float SphereRadius;
+
+	// Melle Attack Animation Montage
 	UPROPERTY(EditDefaultsOnly,  Category = "Anims")
 	class UAnimMontage* MeleeAttackMontage;
 
+	// Need this to fire sphere trace
 	UPROPERTY()
 	TArray<AActor*> ActorsToIgnore;
 
 	UPROPERTY()
 	class USkeletalMeshComponent* OwnerMesh;
+
+	// HitResult - OUT param
+	bool SphereTrace(FHitResult &HitResult);
 
 protected:
 

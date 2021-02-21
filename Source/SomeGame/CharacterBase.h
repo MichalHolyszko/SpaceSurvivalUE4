@@ -71,4 +71,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UCombatComponent* CombatComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UHealthComponent* HealthComponent;
 };

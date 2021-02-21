@@ -4,6 +4,7 @@
 
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Animation/AnimInstance.h"
 #include "Engine/EngineTypes.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -22,7 +23,9 @@ UCombatComponent::UCombatComponent()
 	StimuliComponent = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("AIPerceptionStimuliSourceComponent"));
 
 	// Initialize variables
+	Damage = 10.f;
 	AttackRange = 200.f;
+	SphereRadius = 25.f;
 }
 
 
@@ -63,18 +66,24 @@ void UCombatComponent::TryToDealDamage(FName NotifyName, const FBranchingPointNo
 {
 	if(OwnerMesh != nullptr)
 	{
-		FVector TraceStart = OwnerMesh->GetSocketLocation(TEXT("HandSocket")); 
-		FVector Direction = UKismetMathLibrary::GetForwardVector(GetOwner()->GetActorRotation());
-		FVector TraceEnd = TraceStart + Direction * 100.f;
 		FHitResult HitResult;
-
-		bool bIsHit = UKismetSystemLibrary::SphereTraceSingle(GetWorld(), TraceStart, TraceEnd, 25.f, ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResult, true);
+		bool bIsHit = SphereTrace(HitResult);
 
 		if(bIsHit)
 		{
-			UAISense_Damage::ReportDamageEvent(GetWorld(), HitResult.GetActor(), GetOwner(), 0, HitResult.Location, HitResult.Location);
+			UAISense_Damage::ReportDamageEvent(GetWorld(), HitResult.GetActor(), GetOwner(), 0.f, HitResult.Location, HitResult.Location);
+			UGameplayStatics::ApplyDamage(HitResult.GetActor(), Damage, GetOwner()->GetInstigatorController(),  GetOwner(), nullptr);
 		}
 	}
+}
+
+bool UCombatComponent::SphereTrace(FHitResult &HitResult)
+{
+	FVector TraceStart = OwnerMesh->GetSocketLocation(TEXT("HandSocket")); 
+	FVector Direction = UKismetMathLibrary::GetForwardVector(GetOwner()->GetActorRotation());
+	FVector TraceEnd = TraceStart + Direction * AttackRange;
+
+	return UKismetSystemLibrary::SphereTraceSingle(GetWorld(), TraceStart, TraceEnd, SphereRadius, ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResult, true);
 }
 
 

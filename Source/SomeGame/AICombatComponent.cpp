@@ -6,6 +6,7 @@
 #include "Animation/AnimInstance.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Engine/EngineTypes.h"
 
 // Sets default values for this component's properties
@@ -17,6 +18,8 @@ UAICombatComponent::UAICombatComponent()
 
 	// Initialize Attack Range variable
 	AttackRange = 200.f;
+	Damage = 10.f;
+	SphereRadius = 25.f;
 }
 
 // Called when the game starts
@@ -44,7 +47,6 @@ void UAICombatComponent::Attack()
 	if(OwnerMesh !=  nullptr && AttackMontage != nullptr )
 	{
 		OwnerMesh->GetAnimInstance()->Montage_Play(AttackMontage);
-		UE_LOG(LogTemp, Error, TEXT("Enemy ATTACK!"));
 	}
 }
 
@@ -52,18 +54,27 @@ void UAICombatComponent::TryToDealDamage(FName NotifyName, const FBranchingPoint
 {
 	if(OwnerMesh != nullptr)
 	{
-		FVector TraceStart = OwnerMesh->GetSocketLocation(TEXT("HandSocket")); 
-		FVector Direction = UKismetMathLibrary::GetForwardVector(GetOwner()->GetActorRotation());
-		FVector TraceEnd = TraceStart + Direction * AttackRange;
 		FHitResult HitResult;
-
-		bool bIsHit = UKismetSystemLibrary::SphereTraceSingle(GetWorld(), TraceStart, TraceEnd, 25.f, ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResult, true);
+		bool bIsHit = SphereTrace(HitResult);
 
 		if(bIsHit)
 		{
-			UE_LOG(LogTemp, Error, TEXT("Player HITTED!"));
+			if(HitResult.GetActor() != UGameplayStatics::GetPlayerPawn(GetWorld(), 0)) 
+			{
+				 return; 
+			}
+			UGameplayStatics::ApplyDamage(HitResult.GetActor(), Damage, GetOwner()->GetInstigatorController(),  GetOwner(), nullptr);			
 		}
 	}
+}
+
+bool UAICombatComponent::SphereTrace(FHitResult &HitResult)
+{
+	FVector TraceStart = OwnerMesh->GetSocketLocation(TEXT("HandSocket")); 
+	FVector Direction = UKismetMathLibrary::GetForwardVector(GetOwner()->GetActorRotation());
+	FVector TraceEnd = TraceStart + Direction * AttackRange;
+
+	return UKismetSystemLibrary::SphereTraceSingle(GetWorld(), TraceStart, TraceEnd, SphereRadius, ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitResult, true);
 }
 
 float UAICombatComponent::GetAttackRange() const

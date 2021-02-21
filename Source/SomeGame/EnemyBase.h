@@ -19,10 +19,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UAICombatComponent* AICombatComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UHealthComponent* HealthComponent;
 
 };

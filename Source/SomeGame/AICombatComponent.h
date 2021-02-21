@@ -31,13 +31,21 @@ public:
 
 private:
 
-	// Melle Attack Animation Montage
-	UPROPERTY(EditDefaultsOnly, Category = "Anims")
-	class UAnimMontage* AttackMontage;
+	// Character Damage Per Hit
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float Damage;
 
 	// Character Attack Range
 	UPROPERTY(EditAnywhere, Category = "Stats")
 	float AttackRange;
+
+	// Character Attack Range
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float SphereRadius;
+
+	// Melle Attack Animation Montage
+	UPROPERTY(EditDefaultsOnly, Category = "Anims")
+	class UAnimMontage* AttackMontage;
 
 	// Need this to fire sphere trace
 	UPROPERTY()
@@ -45,6 +53,9 @@ private:
 
 	UPROPERTY()
 	class USkeletalMeshComponent* OwnerMesh;
+
+	// HitResult - OUT param
+	bool SphereTrace(FHitResult &HitResult);
 
 protected:
 	// Called when the game starts

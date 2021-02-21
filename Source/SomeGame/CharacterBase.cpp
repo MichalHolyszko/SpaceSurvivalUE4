@@ -2,6 +2,7 @@
 
 #include "CharacterBase.h"
 #include "CombatComponent.h"
+#include "HealthComponent.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -48,6 +49,7 @@ ACharacterBase::ACharacterBase()
 	
 	// Initialize Components
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 
 	// Initialize variables
 	NormalSpeed = 600.f;

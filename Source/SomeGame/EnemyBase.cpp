@@ -3,6 +3,7 @@
 #include "EnemyBase.h"
 
 #include "AICombatComponent.h"
+#include "HealthComponent.h"
 
 // Sets default values
 AEnemyBase::AEnemyBase()
@@ -11,6 +12,7 @@ AEnemyBase::AEnemyBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 	AICombatComponent = CreateDefaultSubobject<UAICombatComponent>(TEXT("AICombatComponent"));
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 }
 // Called when the game starts or when spawned
 void AEnemyBase::BeginPlay()

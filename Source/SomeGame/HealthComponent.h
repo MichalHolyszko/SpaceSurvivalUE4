@@ -16,13 +16,27 @@ public:
 	// Sets default values for this component's properties
 	UHealthComponent();
 
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	// UFUNCTION(BlueprintCallable)
+	// float GetHealthPercent() const;
+
+	// float GetGealth() const ;
+
+	UFUNCTION()
+	virtual void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float MaxHealth;
+
+	UPROPERTY(VisibleAnywhere, Category = "Stats")
+	float ActualHealth;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
 };
