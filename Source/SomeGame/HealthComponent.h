@@ -23,6 +23,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float GetHealthPercent() const;
 
+	UFUNCTION(BlueprintCallable)
 	float GetActualHealth() const ;
 
 	UFUNCTION()
