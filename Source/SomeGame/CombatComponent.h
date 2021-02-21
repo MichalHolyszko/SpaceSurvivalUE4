@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "CombatComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SOMEGAME_API UCombatComponent : public UActorComponent
 {

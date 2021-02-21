@@ -2,6 +2,8 @@
 
 #include "HealthComponent.h"
 
+#include "Math/UnrealMathUtility.h"
+
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
 {
@@ -32,6 +34,17 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser )
 {
 	UE_LOG(LogTemp, Warning, TEXT("Damage taken: %f"), Damage);
-	
+	ActualHealth = FMath::Clamp<float>(ActualHealth - Damage, 0.f, MaxHealth);
+	UE_LOG(LogTemp, Error, TEXT("Health: %f"), ActualHealth);
+
+	if(ActualHealth <= 0.f)
+	{
+		UE_LOG(LogTemp, Error, TEXT("I'M DEAD!"), ActualHealth);
+	}
+}
+
+bool UHealthComponent::IsDead() const
+{
+	return ActualHealth <= 0.f;
 }
 

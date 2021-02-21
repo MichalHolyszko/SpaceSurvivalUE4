@@ -27,6 +27,9 @@ public:
 	UFUNCTION()
 	virtual void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 
+	UFUNCTION(BlueprintCallable)
+	bool IsDead() const;
+
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Stats")
