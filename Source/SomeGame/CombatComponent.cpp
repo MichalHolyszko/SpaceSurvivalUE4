@@ -71,8 +71,8 @@ void UCombatComponent::TryToDealDamage(FName NotifyName, const FBranchingPointNo
 
 		if(bIsHit)
 		{
-			UAISense_Damage::ReportDamageEvent(GetWorld(), HitResult.GetActor(), GetOwner(), 0.f, HitResult.Location, HitResult.Location);
 			UGameplayStatics::ApplyDamage(HitResult.GetActor(), Damage, GetOwner()->GetInstigatorController(),  GetOwner(), nullptr);
+			UAISense_Damage::ReportDamageEvent(GetWorld(), HitResult.GetActor(), GetOwner(), 0.f, HitResult.Location, HitResult.Location);
 		}
 	}
 }

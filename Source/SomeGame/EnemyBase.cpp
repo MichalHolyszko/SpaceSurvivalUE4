@@ -11,8 +11,12 @@ AEnemyBase::AEnemyBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Initalize Components
 	AICombatComponent = CreateDefaultSubobject<UAICombatComponent>(TEXT("AICombatComponent"));
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+
+	// Initialize variables
+	DestroyDelay = 5.f;
 }
 // Called when the game starts or when spawned
 void AEnemyBase::BeginPlay()
@@ -35,6 +39,9 @@ void AEnemyBase::Tick(float DeltaTime)
 void AEnemyBase::HandleDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Enemy Death"));
+
+	SetActorEnableCollision(false);
+	SetLifeSpan(DestroyDelay);
 }
 
 

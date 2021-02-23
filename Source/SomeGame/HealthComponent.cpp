@@ -11,8 +11,8 @@ UHealthComponent::UHealthComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
+	// Initialize default variables values
 	MaxHealth = 100.f;
-	ActualHealth = MaxHealth;
 }
 
 
@@ -21,6 +21,7 @@ void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	ActualHealth = MaxHealth;
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::TakeDamage);
 }
 
@@ -36,10 +37,8 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const clas
 	ActualHealth = FMath::Clamp<float>(ActualHealth - Damage, 0.f, MaxHealth);
 	UE_LOG(LogTemp, Error, TEXT("Health: %f"), ActualHealth);
 
-	if(ActualHealth <= 0.f)
+	if(IsDead())
 	{
-		UE_LOG(LogTemp, Error, TEXT("I'M DEAD!"), ActualHealth);
-
 		OnDeath.Broadcast();
 	}
 }

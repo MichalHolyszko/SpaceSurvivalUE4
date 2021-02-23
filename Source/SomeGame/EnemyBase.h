@@ -21,6 +21,11 @@ public:
 	UFUNCTION()
 	void HandleDeath();
 
+private:
+
+	UPROPERTY(Editanywhere, Category = "Death")
+	float DestroyDelay;
+
 protected:
 
 	// Called when the game starts or when spawned
@@ -31,4 +36,5 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UHealthComponent* HealthComponent;
+
 };
