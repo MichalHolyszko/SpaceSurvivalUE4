@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerKilledDelegate);
+
 UCLASS()
 class SOMEGAME_API ACharacterBase : public ACharacter
 {
@@ -41,6 +43,9 @@ public:
 
 	UFUNCTION()
 	void HandleDeath();
+
+	UPROPERTY()
+	FOnPlayerKilledDelegate OnPlayerKilled;
 
 private:
 

@@ -102,7 +102,7 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ACharacterBase::MoveForward(float Value)
 {
-	if ((Controller != nullptr) && (Value != 0.0f))
+	if ((Controller != nullptr) && (Value != 0.0f) && HealthComponent != nullptr && !HealthComponent->IsDead())
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -116,7 +116,7 @@ void ACharacterBase::MoveForward(float Value)
 
 void ACharacterBase::MoveRight(float Value)
 {
-	if ( (Controller != nullptr) && (Value != 0.0f) )
+	if ( (Controller != nullptr) && (Value != 0.0f) && HealthComponent != nullptr && !HealthComponent->IsDead())
 	{
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -131,7 +131,7 @@ void ACharacterBase::MoveRight(float Value)
 
 void ACharacterBase::Sprint()
 {
-	if(MovementComponent != nullptr)
+	if(MovementComponent != nullptr && HealthComponent != nullptr && !HealthComponent->IsDead())
 	{
 		if(MovementComponent->MaxWalkSpeed != SprintSpeed)
 		{
@@ -148,6 +148,10 @@ void ACharacterBase::Sprint()
 void ACharacterBase::HandleDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Player Death"));
+
+	// Remove Bindings from Movement and Melle Attack
+	SetActorEnableCollision(false);
+	OnPlayerKilled.Broadcast();
 }
 
 

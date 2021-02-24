@@ -9,6 +9,7 @@
 AEnemyAIController::AEnemyAIController()
 {
     PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("AIPerceptionComponent"));
+    EnemyStatusEnum = EEnemyStatus::Patrol;
 }
 
 void AEnemyAIController::BeginPlay() 
@@ -20,7 +21,6 @@ void AEnemyAIController::BeginPlay()
         RunBehaviorTree(BehaviorTree);
 
         PerceptionComponent->OnTargetPerceptionInfoUpdated.AddDynamic(this, &AEnemyAIController::TargetPerceptionInfoUpdated);
-        EnemyStatusEnum = EEnemyStatus::Patrol;
     }
 }
 
@@ -28,13 +28,16 @@ void AEnemyAIController::TargetPerceptionInfoUpdated(const FActorPerceptionUpdat
 {
     if(UpdateInfo.Stimulus.WasSuccessfullySensed())
     {
-        EnemyStatusEnum = EEnemyStatus::Combat;
-        GetBlackboardComponent()->SetValueAsEnum(TEXT("EnemyStatus"), (int8)EnemyStatusEnum);
+        SetEnemyStatus(EEnemyStatus::Combat);
     }
 }
 
 void AEnemyAIController::SetEnemyStatus(EEnemyStatus EnemyStatusToSet)
 {
-    EnemyStatusEnum = EnemyStatusToSet;
+    if(EnemyStatusEnum != EnemyStatusToSet)
+    {
+        EnemyStatusEnum = EnemyStatusToSet;
+        GetBlackboardComponent()->SetValueAsEnum(TEXT("EnemyStatus"), (int8)EnemyStatusEnum);
+    }
 }
 

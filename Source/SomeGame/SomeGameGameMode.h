@@ -12,7 +12,24 @@ class ASomeGameGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
+
 	ASomeGameGameMode();
+	
+	virtual void StartPlay() override;
+
+	UFUNCTION()
+	void PlayerKilled();
+
+private:
+
+	UPROPERTY()
+	class ACharacterBase* PlayerPawn;
+
+	UPROPERTY()
+	TArray<AActor*> FoundControllers;
+
+	UPROPERTY()
+	class AEnemyAIController* AIController;
 };
 
 
