@@ -35,6 +35,5 @@ void ASomeGameGameMode::PlayerKilled()
         {
             Controller->SetEnemyStatus(EEnemyStatus::Patrol);
         }
-      
     }
 }

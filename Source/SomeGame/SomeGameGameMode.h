@@ -24,12 +24,6 @@ private:
 
 	UPROPERTY()
 	class ACharacterBase* PlayerPawn;
-
-	UPROPERTY()
-	TArray<AActor*> FoundControllers;
-
-	UPROPERTY()
-	class AEnemyAIController* AIController;
 };
 
 

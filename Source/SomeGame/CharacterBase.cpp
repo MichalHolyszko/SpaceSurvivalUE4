@@ -82,27 +82,30 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	// Set up gameplay key bindings
-	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
-	PlayerInputComponent->BindAxis("MoveForward", this, &ACharacterBase::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &ACharacterBase::MoveRight);
-
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-
-	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
-	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint);
-	if(CombatComponent != nullptr)
+	if(PlayerInputComponent != nullptr)
 	{
-		PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack);
+		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+		PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+		PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+		PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+
+		PlayerInputComponent->BindAxis("MoveRight", this, &ACharacterBase::MoveRight);
+		PlayerInputComponent->BindAxis("MoveForward", this, &ACharacterBase::MoveForward);
+
+		PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
+		PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint);
+
+		if(CombatComponent != nullptr)
+		{
+			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack);
+		}
 	}
 }
 
 void ACharacterBase::MoveForward(float Value)
 {
-	if ((Controller != nullptr) && (Value != 0.0f) && HealthComponent != nullptr && !HealthComponent->IsDead())
+	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -116,7 +119,7 @@ void ACharacterBase::MoveForward(float Value)
 
 void ACharacterBase::MoveRight(float Value)
 {
-	if ( (Controller != nullptr) && (Value != 0.0f) && HealthComponent != nullptr && !HealthComponent->IsDead())
+	if ( (Controller != nullptr) && (Value != 0.0f))
 	{
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -131,7 +134,7 @@ void ACharacterBase::MoveRight(float Value)
 
 void ACharacterBase::Sprint()
 {
-	if(MovementComponent != nullptr && HealthComponent != nullptr && !HealthComponent->IsDead())
+	if(MovementComponent != nullptr)
 	{
 		if(MovementComponent->MaxWalkSpeed != SprintSpeed)
 		{
@@ -147,9 +150,24 @@ void ACharacterBase::Sprint()
 
 void ACharacterBase::HandleDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Player Death"));
-
 	// Remove Bindings from Movement and Melle Attack
+	if(InputComponent != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player Death"));
+		InputComponent->RemoveActionBinding(TEXT("MeleeAttack"), IE_Pressed);
+
+		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Pressed);
+		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Released);
+
+		InputComponent->RemoveActionBinding(TEXT("Jump"), IE_Pressed);
+		InputComponent->RemoveActionBinding(TEXT("Jump"), IE_Released);
+
+		for(int32 i = 0; i < InputComponent->AxisBindings.Num(); i++)
+		{
+			InputComponent->AxisBindings.RemoveAt(i);
+		}
+	}
+
 	SetActorEnableCollision(false);
 	OnPlayerKilled.Broadcast();
 }
