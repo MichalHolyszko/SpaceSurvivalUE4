@@ -77,6 +77,9 @@ protected:
 	// Called for Increase Character Movement Speed
 	void Sprint();
 
+	// Remove Bindings from Movement and Melle Attack
+	void RemoveInputBindings();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UCombatComponent* CombatComponent;
 

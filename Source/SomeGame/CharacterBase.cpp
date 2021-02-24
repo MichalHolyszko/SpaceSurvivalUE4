@@ -150,7 +150,14 @@ void ACharacterBase::Sprint()
 
 void ACharacterBase::HandleDeath()
 {
-	// Remove Bindings from Movement and Melle Attack
+	OnPlayerKilled.Broadcast();
+	
+	RemoveInputBindings();
+	SetActorEnableCollision(false);
+}
+
+void ACharacterBase::RemoveInputBindings()
+{
 	if(InputComponent != nullptr)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Death"));
@@ -167,9 +174,6 @@ void ACharacterBase::HandleDeath()
 			InputComponent->AxisBindings.RemoveAt(i);
 		}
 	}
-
-	SetActorEnableCollision(false);
-	OnPlayerKilled.Broadcast();
 }
 
 
