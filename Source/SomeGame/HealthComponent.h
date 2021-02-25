@@ -35,16 +35,14 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnDeathDelegate OnDeath;
 
-private:
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, Category = "Stats")
 	float MaxHealth;
 
 	UPROPERTY(VisibleAnywhere, Category = "Stats")
 	float ActualHealth;
-
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
 
 };

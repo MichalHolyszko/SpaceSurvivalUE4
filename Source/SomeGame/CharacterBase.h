@@ -4,12 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+
+#include "InteractInterface.h"
 #include "CharacterBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerKilledDelegate);
 
 UCLASS()
-class SOMEGAME_API ACharacterBase : public ACharacter
+class SOMEGAME_API ACharacterBase : public ACharacter, public IInteractInterface
 {
 	GENERATED_BODY()
 
@@ -85,4 +87,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UHealthComponent* HealthComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UInventoryComponent* InventoryComponent;
 };
