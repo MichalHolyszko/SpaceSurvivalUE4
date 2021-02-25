@@ -37,6 +37,10 @@ public:
 	// Called to change enemy status
 	void SetEnemyStatus(EEnemyStatus EnemyStatusToSet);
 
+	// Called On Pawn Death
+	UFUNCTION()
+	void PawnDeath();
+
 protected:
 
 	// Called when the game starts or when spawned
@@ -51,4 +55,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UAIPerceptionComponent* AIPerceptionComponent;
+
+	UPROPERTY()
+	class UHealthComponent* HealthComponent; 
 };

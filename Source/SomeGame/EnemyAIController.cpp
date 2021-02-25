@@ -2,6 +2,8 @@
 
 #include "EnemyAIController.h"
 
+#include "HealthComponent.h"
+
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
@@ -16,11 +18,14 @@ void AEnemyAIController::BeginPlay()
 {
     Super::BeginPlay();
 
-    if(BehaviorTree != nullptr && PerceptionComponent != nullptr)
+     HealthComponent = GetPawn()->FindComponentByClass<UHealthComponent>();
+
+    if(BehaviorTree != nullptr && PerceptionComponent != nullptr && HealthComponent)
     {
         RunBehaviorTree(BehaviorTree);
 
         PerceptionComponent->OnTargetPerceptionInfoUpdated.AddDynamic(this, &AEnemyAIController::TargetPerceptionInfoUpdated);
+        HealthComponent->OnDeath.AddDynamic(this, &AEnemyAIController::PawnDeath);
     }
 }
 
@@ -41,3 +46,11 @@ void AEnemyAIController::SetEnemyStatus(EEnemyStatus EnemyStatusToSet)
     }
 }
 
+void AEnemyAIController::PawnDeath()
+{
+    if(HealthComponent != nullptr)
+    {
+       GetBlackboardComponent()->SetValueAsBool(TEXT("IsDead"), true);
+    }
+}
+  
