@@ -21,3 +21,13 @@ void APlayerControllerBase::BeginPlay()
         }
     }
 }
+
+void APlayerControllerBase::PlayerKilled()
+{
+    UE_LOG(LogTemp, Warning, TEXT("Controller: Player Death"));
+
+     if(HUD != nullptr)
+     {
+        HUD->RemoveFromViewport();
+    }
+}

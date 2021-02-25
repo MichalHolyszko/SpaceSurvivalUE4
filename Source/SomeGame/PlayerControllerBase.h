@@ -18,6 +18,8 @@ public:
 
 	APlayerControllerBase();
 
+	void PlayerKilled();
+
 protected:
 
 	virtual void BeginPlay() override;

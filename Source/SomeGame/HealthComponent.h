@@ -32,7 +32,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool IsDead() const;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintAssignable)
 	FOnDeathDelegate OnDeath;
 
 private:

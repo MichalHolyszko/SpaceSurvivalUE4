@@ -7,6 +7,8 @@
 #include "EnemyAIController.h"
 #include "CharacterBase.h"
 #include "EngineUtils.h"
+#include "CharacterBase.h"
+#include "PlayerControllerBase.h"
 
 ASomeGameGameMode::ASomeGameGameMode()
 {
@@ -27,13 +29,19 @@ void ASomeGameGameMode::StartPlay()
 
 void ASomeGameGameMode::PlayerKilled()
 {
-    //UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemyAIController::StaticClass(), FoundControllers);
-
     for(AEnemyAIController* Controller : TActorRange<AEnemyAIController>(GetWorld()))
     {
         if(Controller != nullptr)
         {
             Controller->SetEnemyStatus(EEnemyStatus::Patrol);
+        }
+    }
+    if(PlayerPawn != nullptr)
+    {
+        APlayerControllerBase* PlayerController = Cast<APlayerControllerBase>(PlayerPawn->GetController());
+        if(PlayerController != nullptr)
+        {
+            PlayerController->PlayerKilled();
         }
     }
 }

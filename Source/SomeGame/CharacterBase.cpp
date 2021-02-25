@@ -152,6 +152,7 @@ void ACharacterBase::HandleDeath()
 {
 	OnPlayerKilled.Broadcast();
 	
+	//DetachFromControllerPendingDestroy();
 	RemoveInputBindings();
 	SetActorEnableCollision(false);
 }
