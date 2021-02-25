@@ -64,6 +64,7 @@ void UCombatComponent::MeleeAttack()
 
 void UCombatComponent::TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
+	UE_LOG(LogTemp, Error, TEXT("COMBAT COMPONENT: TRY TO DEAL DAMAGE!"));
 	if(OwnerMesh != nullptr)
 	{
 		FHitResult HitResult;

@@ -2,7 +2,7 @@
 
 #include "EnemyBase.h"
 
-#include "AICombatComponent.h"
+#include "AICombatComponentt.h"
 #include "HealthComponent.h"
 
 // Sets default values
@@ -12,7 +12,7 @@ AEnemyBase::AEnemyBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Initalize Components
-	AICombatComponent = CreateDefaultSubobject<UAICombatComponent>(TEXT("AICombatComponent"));
+	AICombatComponentt = CreateDefaultSubobject<UAICombatComponentt>(TEXT("AICombatComponent"));
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 
 	// Initialize variables

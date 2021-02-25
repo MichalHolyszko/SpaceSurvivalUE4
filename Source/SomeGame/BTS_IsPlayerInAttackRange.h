@@ -27,7 +27,7 @@ private:
 	class APawn* PlayerPawn;
 
 	UPROPERTY()
-	class UAICombatComponent* CombatComponent;
+	class UAICombatComponentt* CombatComponent;
 
 protected:
 

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BTS_IsPlayerInAttackRange.h"
-#include "AICombatComponent.h"
+#include "AICombatComponentt.h"
 
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -19,7 +19,7 @@ void UBTS_IsPlayerInAttackRange::OnSearchStart(FBehaviorTreeSearchData& SearchDa
 
     if(MyPawn != nullptr)
     {
-        CombatComponent = MyPawn->FindComponentByClass<UAICombatComponent>();
+        CombatComponent = MyPawn->FindComponentByClass<UAICombatComponentt>();
     }
 }
 

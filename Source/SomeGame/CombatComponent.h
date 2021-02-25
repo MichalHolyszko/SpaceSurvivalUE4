@@ -15,17 +15,23 @@ public:
 	// Sets default values for this component's properties
 	UCombatComponent();
 
-		// Called every frame
+	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	// Called By Anim Montage To Fire Sphere Trace
 	UFUNCTION()
-	void TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
+	virtual void TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
 
 	// Called by Player to execute melle attack
-	void MeleeAttack();
+	virtual void MeleeAttack();
 
-private:
+protected:
+
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UAIPerceptionStimuliSourceComponent* StimuliComponent;
 
 	// Character Damage Per Hit
 	UPROPERTY(EditAnywhere, Category = "Stats")
@@ -52,12 +58,4 @@ private:
 
 	// HitResult - OUT param
 	bool SphereTrace(FHitResult &HitResult);
-
-protected:
-
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	class UAIPerceptionStimuliSourceComponent* StimuliComponent;
 };

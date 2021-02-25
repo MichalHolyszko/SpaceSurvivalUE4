@@ -21,7 +21,7 @@ public:
 private:
 
 	UPROPERTY()
-	class UAICombatComponent* CombatComponent;
+	class UAICombatComponentt* CombatComponent;
 
 protected:
 

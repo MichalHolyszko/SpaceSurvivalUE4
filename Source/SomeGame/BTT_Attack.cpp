@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BTT_Attack.h"
-#include "AICombatComponent.h"
+#include "AICombatComponentt.h"
 
 #include "AIController.h"
 
@@ -14,11 +14,11 @@ EBTNodeResult::Type UBTT_Attack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, 
 {
     Super::ExecuteTask(OwnerComp,NodeMemory);
 
-    CombatComponent = OwnerComp.GetAIOwner()->GetPawn()->FindComponentByClass<UAICombatComponent>();
+    CombatComponent = OwnerComp.GetAIOwner()->GetPawn()->FindComponentByClass<UAICombatComponentt>();
     
     if(CombatComponent != nullptr)
     {
-        CombatComponent->Attack();
+        CombatComponent->MeleeAttack();
         return EBTNodeResult::Succeeded;
     }
     else
