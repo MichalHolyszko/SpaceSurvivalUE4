@@ -49,6 +49,8 @@ public:
 	UPROPERTY()
 	FOnPlayerKilledDelegate OnPlayerKilled;
 
+	void Interaction();
+
 private:
 
 	// Default Movement Speed

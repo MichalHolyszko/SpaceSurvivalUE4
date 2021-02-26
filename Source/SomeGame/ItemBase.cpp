@@ -24,3 +24,8 @@ void AItemBase::Tick(float DeltaTime)
 
 }
 
+void AItemBase::Interact_Implementation()
+{
+	UE_LOG(LogTemp, Error, TEXT("XD"));
+}
+

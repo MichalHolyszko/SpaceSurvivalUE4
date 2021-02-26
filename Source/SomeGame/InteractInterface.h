@@ -23,5 +23,6 @@ class SOMEGAME_API IInteractInterface
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
-	virtual void Interact();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = " Interaction")
+	void Interact();
 };

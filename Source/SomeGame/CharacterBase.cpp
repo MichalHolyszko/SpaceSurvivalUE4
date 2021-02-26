@@ -86,9 +86,6 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	// Set up gameplay key bindings
 	if(PlayerInputComponent != nullptr)
 	{
-		PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-		PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
 		PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 		PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 
@@ -102,6 +99,8 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		{
 			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack);
 		}
+
+		PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterBase::Interaction);
 	}
 }
 
@@ -145,16 +144,29 @@ void ACharacterBase::Sprint()
 		else
 		{
 			MovementComponent->MaxWalkSpeed = NormalSpeed;
-
 		}
 	}
+}
+
+void ACharacterBase::Interaction()
+{
+	TArray<AActor*> OverlappingActors;
+ 	GetOverlappingActors(OverlappingActors);
+
+	for(AActor* OverllapingActor : OverlappingActors)
+	{
+		if(OverllapingActor != nullptr && OverllapingActor->Implements<UInteractInterface>())
+		{
+			IInteractInterface::Execute_Interact(OverllapingActor);
+			break;
+		}
+	} 
 }
 
 void ACharacterBase::HandleDeath()
 {
 	OnPlayerKilled.Broadcast();
 	
-	//DetachFromControllerPendingDestroy();
 	RemoveInputBindings();
 	SetActorEnableCollision(false);
 }
@@ -168,9 +180,6 @@ void ACharacterBase::RemoveInputBindings()
 
 		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Pressed);
 		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Released);
-
-		InputComponent->RemoveActionBinding(TEXT("Jump"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("Jump"), IE_Released);
 
 		for(int32 i = 0; i < InputComponent->AxisBindings.Num(); i++)
 		{
