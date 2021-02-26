@@ -37,4 +37,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UHealthComponent* HealthComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UEnemyHealthWidgetComponent* HealthWidgetComponent;
+
 };

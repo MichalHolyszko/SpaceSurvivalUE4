@@ -17,7 +17,6 @@ void UAICombatComponentt::BeginPlay()
 
 void UAICombatComponentt::TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
-    UE_LOG(LogTemp, Error, TEXT("AI COMBAT COMPONENT: TRY TO DEAL DAMAGE!"));
     if(OwnerMesh != nullptr)
 	{
 		FHitResult HitResult;

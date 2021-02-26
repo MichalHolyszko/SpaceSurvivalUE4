@@ -4,6 +4,7 @@
 
 #include "AICombatComponentt.h"
 #include "HealthComponent.h"
+#include "EnemyHealthWidgetComponent.h"
 
 // Sets default values
 AEnemyBase::AEnemyBase()
@@ -14,6 +15,8 @@ AEnemyBase::AEnemyBase()
 	// Initalize Components
 	AICombatComponentt = CreateDefaultSubobject<UAICombatComponentt>(TEXT("AICombatComponent"));
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	HealthWidgetComponent = CreateDefaultSubobject<UEnemyHealthWidgetComponent>(TEXT("HealthWidgetComponent"));
+	HealthWidgetComponent->SetupAttachment(RootComponent);
 
 	// Initialize variables
 	DestroyDelay = 5.f;
