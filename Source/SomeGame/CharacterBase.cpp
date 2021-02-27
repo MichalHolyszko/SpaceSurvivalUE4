@@ -100,6 +100,11 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack);
 		}
 
+		if(InventoryComponent != nullptr)
+		{
+			PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory);
+		}
+
 		PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterBase::Interaction);
 	}
 }
@@ -177,6 +182,7 @@ void ACharacterBase::RemoveInputBindings()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player Death"));
 		InputComponent->RemoveActionBinding(TEXT("MeleeAttack"), IE_Pressed);
+		InputComponent->RemoveActionBinding(TEXT("ToggleInventory"), IE_Pressed);
 
 		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Pressed);
 		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Released);

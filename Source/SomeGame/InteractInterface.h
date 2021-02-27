@@ -25,4 +25,5 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = " Interaction")
 	void Interact();
+
 };

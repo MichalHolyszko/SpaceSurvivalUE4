@@ -20,6 +20,7 @@ struct FSlot
 	int32 Quantity;
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnToggleInventoryDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SOMEGAME_API UInventoryComponent : public UActorComponent
@@ -33,6 +34,11 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void ToggleInventory();
+
+	UPROPERTY(BlueprintAssignable)
+	FOnToggleInventoryDelegate OnToggleInventory;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -45,4 +51,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FSlot> Inventory;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D Position;
 };
