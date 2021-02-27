@@ -16,7 +16,8 @@ UInventoryComponent::UInventoryComponent()
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	PrepareInventory();
 }
 
 
@@ -31,6 +32,36 @@ void UInventoryComponent::ToggleInventory()
 {
 	OnToggleInventory.Broadcast();
 }
+
+void UInventoryComponent::PrepareInventory()
+{
+	Inventory.SetNum(NumberOfSlots);
+}
+
+bool UInventoryComponent::AddToInventory(const FSlot &ContentToAdd)
+{
+	if(!ContentToAdd.ItemStruct.bIsStackable)
+	{
+		CreateStack(ContentToAdd);
+	}
+
+
+	return true;
+}
+
+void UInventoryComponent::CreateStack(const FSlot &ContentToAdd)
+{
+	FSlot EmptySlot = FSlot();
+	int32 EmptySlotIndex;
+
+	if(Inventory.Find(EmptySlot, EmptySlotIndex))
+	{
+		Inventory[EmptySlotIndex] = ContentToAdd;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Empty Slot Index: %i"), EmptySlotIndex);
+}
+
 
 
 

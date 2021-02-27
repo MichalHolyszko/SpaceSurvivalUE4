@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ItemBase.h"
+#include "InventoryComponent.h"
 
 // Sets default values
 AItemBase::AItemBase()
@@ -24,8 +25,22 @@ void AItemBase::Tick(float DeltaTime)
 
 }
 
-void AItemBase::Interact_Implementation()
+void AItemBase::Interact_Implementation(AActor* OtherActor)
 {
-	UE_LOG(LogTemp, Error, TEXT("XD"));
+	if(OtherActor != nullptr)
+	{
+		UInventoryComponent* Inventory = OtherActor->FindComponentByClass<UInventoryComponent>();
+		if(Inventory != nullptr)
+		{
+			FSlot NewContent = FSlot();
+			NewContent.ItemStruct = ItemStruct;
+			NewContent.Quantity = 1;
+			if(Inventory->AddToInventory(NewContent))
+			{
+				UE_LOG(LogTemp, Error, TEXT("XD"));
+				Destroy();
+			}
+		}
+	}
 }
 

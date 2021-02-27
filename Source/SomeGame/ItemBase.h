@@ -30,6 +30,11 @@ struct FItem
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<AItemBase> Class;
+
+	FORCEINLINE bool operator==(const FItem &Other) const
+	{
+		return (Name.EqualTo(Other.Name)) && (Description.EqualTo(Other.Description)) && (bIsStackable == Other.bIsStackable) && (bIsConsumable == Other.bIsConsumable) && (Thunbail == Other.Thunbail) && (Class == Other.Class);
+	}
 };
 
 UCLASS()
@@ -44,7 +49,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void Interact_Implementation() override;
+	virtual void Interact_Implementation(AActor* OtherActor) override;
 
 protected:
 	// Called when the game starts or when spawned

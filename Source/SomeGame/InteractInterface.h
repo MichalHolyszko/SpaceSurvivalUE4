@@ -24,6 +24,6 @@ class SOMEGAME_API IInteractInterface
 public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = " Interaction")
-	void Interact();
+	void Interact(AActor* OtherActor);
 
 };

@@ -18,6 +18,11 @@ struct FSlot
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Quantity;
+
+	FORCEINLINE bool operator==(const FSlot &Other) const
+	{
+		return (ItemStruct == Other.ItemStruct) && (Quantity == Other.Quantity);
+	}
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnToggleInventoryDelegate);
@@ -39,6 +44,8 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnToggleInventoryDelegate OnToggleInventory;
 
+	bool AddToInventory(const FSlot &ContentToAdd);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -54,4 +61,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector2D Position;
+
+	void PrepareInventory();
+
+	void CreateStack(const FSlot &ContentToAdd);
 };

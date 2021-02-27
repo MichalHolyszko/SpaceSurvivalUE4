@@ -162,7 +162,7 @@ void ACharacterBase::Interaction()
 	{
 		if(OverllapingActor != nullptr && OverllapingActor->Implements<UInteractInterface>())
 		{
-			IInteractInterface::Execute_Interact(OverllapingActor);
+			IInteractInterface::Execute_Interact(OverllapingActor, this);
 			break;
 		}
 	} 
