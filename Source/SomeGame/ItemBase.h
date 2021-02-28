@@ -60,13 +60,4 @@ protected:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	USceneComponent* Root;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	class USphereComponent* SphereComponent;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	UStaticMeshComponent* Mesh;
 };
