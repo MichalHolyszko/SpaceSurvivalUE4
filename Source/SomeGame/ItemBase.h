@@ -50,6 +50,9 @@ public:
 
 	bool AddToInventory(AActor* InventoryOwner, int32 ItemQuantity);
 
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void UseItem();
+
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

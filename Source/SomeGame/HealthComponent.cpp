@@ -41,6 +41,11 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const clas
 	}
 }
 
+void UHealthComponent::RestoreHealth(float HealthPoints)
+{
+	ActualHealth = FMath::Clamp<float>(ActualHealth + HealthPoints, 0.f, MaxHealth);
+}
+
 bool UHealthComponent::IsDead() const
 {
 	return ActualHealth <= 0.f;

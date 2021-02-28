@@ -24,7 +24,10 @@ public:
 	float GetHealthPercent() const;
 
 	UFUNCTION(BlueprintCallable)
-	float GetActualHealth() const ;
+	float GetActualHealth() const;
+
+	UFUNCTION(BlueprintCallable)
+	void RestoreHealth(float HealthPoints);
 
 	UFUNCTION()
 	virtual void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
