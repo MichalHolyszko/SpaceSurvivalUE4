@@ -87,6 +87,23 @@ bool UInventoryComponent::CreateStack(const FSlot &ContentToAdd)
 	}
 }
 
+void UInventoryComponent::RefreshInventorySlot(int32 Index)
+{	
+	FSlot* UsedSlot = &Inventory[Index];
+
+	if(UsedSlot->ItemStruct.bIsConsumable)
+	{
+		if(UsedSlot->ItemStruct.bIsStackable)
+		{
+			UsedSlot->Quantity--;
+			if(UsedSlot->Quantity <= 0)
+			{
+				Inventory[Index] = FSlot();
+			}
+		}
+	}
+}
+
 
 
 

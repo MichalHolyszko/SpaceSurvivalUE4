@@ -20,10 +20,13 @@ struct FItem
 	FText Description;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsStackable = true;
+	bool bIsUsable = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsConsumable = true;
+	bool bIsConsumable = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsStackable = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UTexture2D* Thunbail = nullptr;
@@ -33,7 +36,7 @@ struct FItem
 
 	FORCEINLINE bool operator==(const FItem &Other) const
 	{
-		return (Name.EqualTo(Other.Name)) && (Description.EqualTo(Other.Description)) && (bIsStackable == Other.bIsStackable) && (bIsConsumable == Other.bIsConsumable) && (Thunbail == Other.Thunbail) && (Class == Other.Class);
+		return (Name.EqualTo(Other.Name)) && (Description.EqualTo(Other.Description)) && (bIsUsable == Other.bIsUsable) && (bIsStackable == Other.bIsStackable) && (bIsConsumable == Other.bIsConsumable) && (Thunbail == Other.Thunbail) && (Class == Other.Class);
 	}
 };
 

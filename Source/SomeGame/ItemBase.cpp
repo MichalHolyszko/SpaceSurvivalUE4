@@ -3,10 +3,6 @@
 #include "ItemBase.h"
 #include "InventoryComponent.h"
 
-#include "Components/SceneComponent.h"
-#include "Components/SphereComponent.h"
-#include "Components/StaticMeshComponent.h"
-
 // Sets default values
 AItemBase::AItemBase()
 {

@@ -46,6 +46,10 @@ public:
 
 	bool AddToInventory(const FSlot &ContentToAdd);
 
+	// Called when after Use Item
+	UFUNCTION(BlueprintCallable)
+	void RefreshInventorySlot(int32 Index);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
