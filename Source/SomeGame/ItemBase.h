@@ -48,7 +48,7 @@ public:
 
 	virtual void Interact_Implementation(AActor* OtherActor) override;
 
-	void AddToInventory(AActor* InventoryOwner, int32 ItemQuantity);
+	bool AddToInventory(AActor* InventoryOwner, int32 ItemQuantity);
 
 protected:
 
@@ -60,4 +60,13 @@ protected:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	USceneComponent* Root;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class USphereComponent* SphereComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UStaticMeshComponent* Mesh;
 };

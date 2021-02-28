@@ -120,16 +120,6 @@
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
 	},
 	{
-		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\DestructibleItemContainer.cpp",
-		"command": "cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
-		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
-	},
-	{
-		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\DestructibleItemContainer.h",
-		"command": "cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
-		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"
-	},
-	{
 		"file": "D:\\\\Unreal Projects\\\\SomeGame\\\\Source\\\\SomeGame\\\\DropComponent.cpp",
 		"command": "cl.exe @\"D:\\Unreal Projects\\SomeGame\\.vscode\\compileCommands_SomeGame\\SomeGame.184.rsp\"",
 		"directory": "D:\\Unreal\\UE_4.26\\Engine\\Source"

@@ -18,6 +18,8 @@ public:
 
 	void DropItem(); 
 
+	void SetQuantity(int32 QuantityToSet);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

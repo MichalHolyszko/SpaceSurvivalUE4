@@ -15,19 +15,34 @@ public:
 	// Sets default values for this actor's properties
 	AItemContainer();
 
+	UFUNCTION()
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSubclassOf<class AItemBase> ItemClass; 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	USceneComponent* Root;
 
-	UPROPERTY()
-	class AItemBase* Item; 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UCapsuleComponent* CapsuleComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 Quantity;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	UStaticMeshComponent* Mesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Health;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class UDropComponent* DropComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	float MaxHealth;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats")
+	float ActualHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
+	int32 MaxQuantity;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats")
+	int32 ActualQuantity;
 };

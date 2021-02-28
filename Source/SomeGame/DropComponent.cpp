@@ -30,7 +30,13 @@ void UDropComponent::DropItem()
 			if(PlayerPawn != nullptr)
 			{
 				Item->AddToInventory(PlayerPawn, Quantity);
+				Item->Destroy();
 			}
 		}
 	}
+}
+
+void UDropComponent::SetQuantity(int32 QuantityToSet)
+{
+	Quantity = QuantityToSet;
 }
