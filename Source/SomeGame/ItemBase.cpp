@@ -7,7 +7,7 @@
 AItemBase::AItemBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 }
 
@@ -35,12 +35,17 @@ void AItemBase::Interact_Implementation(AActor* OtherActor)
 			FSlot NewContent = FSlot();
 			NewContent.ItemStruct = ItemStruct;
 			NewContent.Quantity = 1;
+
 			if(Inventory->AddToInventory(NewContent))
 			{
-				UE_LOG(LogTemp, Error, TEXT("XD"));
 				Destroy();
 			}
 		}
 	}
+}
+
+void AItemBase::AddToInventory()
+{
+	
 }
 

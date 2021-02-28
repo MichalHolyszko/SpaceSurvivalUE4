@@ -17,7 +17,7 @@ struct FSlot
 	FItem ItemStruct;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 Quantity;
+	int32 Quantity = 0;
 
 	FORCEINLINE bool operator==(const FSlot &Other) const
 	{
@@ -64,5 +64,7 @@ protected:
 
 	void PrepareInventory();
 
-	void CreateStack(const FSlot &ContentToAdd);
+	bool CreateStack(const FSlot &ContentToAdd);
+
+	bool AddStackable(const FSlot &ContentToAdd);
 };

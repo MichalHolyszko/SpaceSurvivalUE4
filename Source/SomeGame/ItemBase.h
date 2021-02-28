@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Engine/Texture2D.h"
 
 #include "InteractInterface.h"
 #include "ItemBase.generated.h"
@@ -26,7 +27,7 @@ struct FItem
 	bool bIsConsumable = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UTexture2D* Thunbail;
+	UTexture2D* Thunbail = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<AItemBase> Class;
@@ -51,10 +52,14 @@ public:
 
 	virtual void Interact_Implementation(AActor* OtherActor) override;
 
+
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FItem ItemStruct;
+
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+	void AddToInventory();
 };
