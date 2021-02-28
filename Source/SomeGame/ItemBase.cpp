@@ -34,6 +34,7 @@ void AItemBase::Interact_Implementation(AActor* OtherActor)
 bool AItemBase::AddToInventory(AActor* InventoryOwner, int32 ItemQuantity)
 {
 	UInventoryComponent* Inventory = InventoryOwner->FindComponentByClass<UInventoryComponent>();
+	
 	if(Inventory != nullptr)
 	{
 		FSlot NewContent = FSlot();

@@ -87,10 +87,14 @@ bool UInventoryComponent::CreateStack(const FSlot &ContentToAdd)
 	}
 }
 
+/*  If Item is Consumable & Stackable, decrement Quantity, if Quantity == 0 make empty slot in that index
+	If Item is Consumable & not Stackable make empty slot in that index
+	If Item is not Consumable slot stay the same
+*/
 void UInventoryComponent::RefreshInventorySlot(int32 Index)
 {	
 	FSlot* UsedSlot = &Inventory[Index];
-
+	
 	if(UsedSlot->ItemStruct.bIsConsumable)
 	{
 		if(UsedSlot->ItemStruct.bIsStackable)
@@ -100,6 +104,10 @@ void UInventoryComponent::RefreshInventorySlot(int32 Index)
 			{
 				Inventory[Index] = FSlot();
 			}
+		}
+		else
+		{
+			Inventory[Index] = FSlot();
 		}
 	}
 }
