@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Engine/Texture2D.h"
+//#include "Engine/Texture2D.h"
 
 #include "InteractInterface.h"
 #include "ItemBase.generated.h"
@@ -27,7 +27,7 @@ struct FItem
 	bool bIsConsumable = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UTexture2D* Thunbail = nullptr;
+	class UTexture2D* Thunbail = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<AItemBase> Class;
@@ -51,7 +51,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void Interact_Implementation(AActor* OtherActor) override;
-
 
 protected:
 
