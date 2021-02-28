@@ -5,6 +5,7 @@
 #include "AICombatComponentt.h"
 #include "HealthComponent.h"
 #include "EnemyHealthWidgetComponent.h"
+#include "DropComponent.h"
 
 // Sets default values
 AEnemyBase::AEnemyBase()
@@ -15,6 +16,8 @@ AEnemyBase::AEnemyBase()
 	// Initalize Components
 	AICombatComponentt = CreateDefaultSubobject<UAICombatComponentt>(TEXT("AICombatComponent"));
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	DropComponent = CreateDefaultSubobject<UDropComponent>(TEXT("DropComponent"));
+
 	HealthWidgetComponent = CreateDefaultSubobject<UEnemyHealthWidgetComponent>(TEXT("HealthWidgetComponent"));
 	HealthWidgetComponent->SetupAttachment(RootComponent);
 
@@ -42,10 +45,17 @@ void AEnemyBase::Tick(float DeltaTime)
 void AEnemyBase::HandleDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Enemy Death"));
+	
+	if(DropComponent != nullptr)
+	{
+		DropComponent->DropItem();
+	}
 
 	SetActorEnableCollision(false);
 	SetLifeSpan(DestroyDelay);
 }
+
+
 
 
 

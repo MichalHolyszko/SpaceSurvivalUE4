@@ -9,6 +9,7 @@ AItemBase::AItemBase()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	Quantity = 1;
 }
 
 // Called when the game starts or when spawned
@@ -18,34 +19,27 @@ void AItemBase::BeginPlay()
 	
 }
 
-// Called every frame
-void AItemBase::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void AItemBase::Interact_Implementation(AActor* OtherActor)
 {
 	if(OtherActor != nullptr)
 	{
-		UInventoryComponent* Inventory = OtherActor->FindComponentByClass<UInventoryComponent>();
-		if(Inventory != nullptr)
-		{
-			FSlot NewContent = FSlot();
-			NewContent.ItemStruct = ItemStruct;
-			NewContent.Quantity = 1;
-
-			if(Inventory->AddToInventory(NewContent))
-			{
-				Destroy();
-			}
-		}
+		AddToInventory(OtherActor, Quantity);
 	}
 }
 
-void AItemBase::AddToInventory()
+void AItemBase::AddToInventory(AActor* InventoryOwner, int32 ItemQuantity)
 {
-	
+	UInventoryComponent* Inventory = InventoryOwner->FindComponentByClass<UInventoryComponent>();
+	if(Inventory != nullptr)
+	{
+		FSlot NewContent = FSlot();
+		NewContent.ItemStruct = ItemStruct;
+		NewContent.Quantity = ItemQuantity;
+
+		if(Inventory->AddToInventory(NewContent))
+		{
+			Destroy();
+		}
+	}
 }
 

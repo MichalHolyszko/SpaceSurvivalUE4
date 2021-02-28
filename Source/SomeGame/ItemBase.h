@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-//#include "Engine/Texture2D.h"
 
 #include "InteractInterface.h"
 #include "ItemBase.generated.h"
@@ -47,18 +46,18 @@ public:
 	// Sets default values for this actor's properties
 	AItemBase();
 
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	virtual void Interact_Implementation(AActor* OtherActor) override;
+
+	void AddToInventory(AActor* InventoryOwner, int32 ItemQuantity);
 
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FItem ItemStruct;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 Quantity;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	void AddToInventory();
 };
