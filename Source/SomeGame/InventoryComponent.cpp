@@ -112,6 +112,22 @@ void UInventoryComponent::RefreshInventorySlot(int32 Index)
 	}
 }
 
+// Check if quantity of Item is in Inventory 
+bool UInventoryComponent::InventoryQuery(TSubclassOf<AItemBase> ItemClass, int32 QueryAmmount)
+{
+	int32 ItemQuantity = 0;
+
+	for(FSlot Slot : Inventory)
+	{
+		if(Slot.ItemStruct.Class == ItemClass)
+		{
+			ItemQuantity += Slot.Quantity;
+		}
+	}
+
+	return ItemQuantity >= QueryAmmount;
+}
+
 
 
 

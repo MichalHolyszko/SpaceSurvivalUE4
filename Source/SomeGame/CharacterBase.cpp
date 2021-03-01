@@ -4,6 +4,7 @@
 #include "CombatComponent.h"
 #include "HealthComponent.h"
 #include "InventoryComponent.h"
+#include "QuestComponent.h"
 
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -52,6 +53,7 @@ ACharacterBase::ACharacterBase()
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
+	QuestComponent = CreateDefaultSubobject<UQuestComponent>(TEXT("QuestComponent"));
 
 	// Initialize variables
 	NormalSpeed = 600.f;
@@ -103,6 +105,11 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		if(InventoryComponent != nullptr)
 		{
 			PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory);
+		}
+
+		if(QuestComponent != nullptr)
+		{
+			PlayerInputComponent->BindAction(TEXT("ToggleQuest"), IE_Pressed, QuestComponent, &UQuestComponent::ToggleQuest);
 		}
 
 		PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterBase::Interaction);
