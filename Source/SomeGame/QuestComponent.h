@@ -40,4 +40,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FQuest> Quests; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D Position;
 };
