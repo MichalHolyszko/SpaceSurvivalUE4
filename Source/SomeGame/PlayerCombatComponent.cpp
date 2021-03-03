@@ -29,7 +29,7 @@ void UPlayerCombatComponent::BeginPlay()
 			{
 				Weapon->SetOwner(GetOwner());
 				Weapon->AttachToComponent(OwnerMesh, FAttachmentTransformRules::KeepRelativeTransform,  (TEXT("HandSocket")));
-				Weapon->SetActorHiddenInGame(true);
+				//Weapon->SetActorHiddenInGame(true);
 			}
 		}
 }
@@ -47,9 +47,9 @@ void UPlayerCombatComponent::TryToDealDamage(FName NotifyName, const FBranchingP
 		FHitResult HitResult;
 		bool bIsHit = SphereTrace(HitResult);
 
-		if(bIsHit)
+		if(bIsHit && HitResult.GetActor()->ActorHasTag(TEXT("Enemy")))
 		{
-			UGameplayStatics::ApplyDamage(HitResult.GetActor(), Damage, GetOwner()->GetInstigatorController(),  GetOwner(), nullptr);
+			UGameplayStatics::ApplyDamage(HitResult.GetActor(), Damage, GetOwner()->GetInstigatorController(), GetOwner(), nullptr);
 			UAISense_Damage::ReportDamageEvent(GetWorld(), HitResult.GetActor(), GetOwner(), 0.f, HitResult.Location, HitResult.Location);
 		}
 	}

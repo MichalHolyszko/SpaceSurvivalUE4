@@ -22,7 +22,7 @@ void UAICombatComponentt::TryToDealDamage(FName NotifyName, const FBranchingPoin
 		FHitResult HitResult;
 		bool bIsHit = SphereTrace(HitResult);
 
-		if(bIsHit && HitResult.GetActor()->GetClass() != GetOwner()->GetClass())
+		if(bIsHit && HitResult.GetActor()->ActorHasTag(TEXT("Player")))
 		{
 			UGameplayStatics::ApplyDamage(HitResult.GetActor(), Damage, GetOwner()->GetInstigatorController(),  GetOwner(), nullptr);			
 		}
