@@ -7,10 +7,6 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "EnemyAIController.generated.h"
 
-/**
- * 
- */
-
  UENUM(BlueprintType)
  enum class EEnemyStatus : uint8 
  {
@@ -18,9 +14,6 @@
 	  Combat
  };
 
-/**
- * 
- */
 UCLASS()
 class SOMEGAME_API AEnemyAIController : public AAIController
 {

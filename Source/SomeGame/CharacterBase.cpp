@@ -97,22 +97,17 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
 		PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint);
 
+		PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterBase::Interaction);
+
 		if(CombatComponent != nullptr)
 		{
-			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack);
+			PlayerInputComponent->BindAction("ToggleWeapon", IE_Pressed, CombatComponent, &UCombatComponent::ToggleWeapon);
+			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack); 
 		}
 
-		if(InventoryComponent != nullptr)
-		{
-			PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory);
-		}
+		if(InventoryComponent != nullptr){ PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory); }
+		if(QuestComponent != nullptr) { PlayerInputComponent->BindAction(TEXT("ToggleQuest"), IE_Pressed, QuestComponent, &UQuestComponent::ToggleQuest); }
 
-		if(QuestComponent != nullptr)
-		{
-			PlayerInputComponent->BindAction(TEXT("ToggleQuest"), IE_Pressed, QuestComponent, &UQuestComponent::ToggleQuest);
-		}
-
-		PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterBase::Interaction);
 	}
 }
 

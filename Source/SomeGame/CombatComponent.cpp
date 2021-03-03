@@ -2,6 +2,8 @@
 
 #include "CombatComponent.h"
 
+#include "Weapon.h"
+
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
@@ -12,11 +14,8 @@
 #include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Perception/AISense_Damage.h"
 
-// Sets default values for this component's properties
 UCombatComponent::UCombatComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
 	// Initialize Components
@@ -26,28 +25,42 @@ UCombatComponent::UCombatComponent()
 	Damage = 10.f;
 	AttackRange = 200.f;
 	SphereRadius = 25.f;
+	
+	PlayerStatus = EPlayerStatus::Unarmed;
 }
 
-
-// Called when the game starts
 void UCombatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	OwnerMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+	AActor* Owner = GetOwner();
 
-	if(OwnerMesh != nullptr)
+	if(Owner != nullptr)
 	{
-		ActorsToIgnore.Add(GetOwner());
-		OwnerMesh->GetAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &UCombatComponent::TryToDealDamage);
+		OwnerMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+
+		if(OwnerMesh != nullptr)
+		{
+			ActorsToIgnore.Add(GetOwner());
+			OwnerMesh->GetAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &UCombatComponent::TryToDealDamage);
+			
+			if(WeaponClass != nullptr)
+			{
+				Weapon = GetWorld()->SpawnActor<AWeapon>(WeaponClass);
+				if(Weapon != nullptr)
+				{
+					Weapon->SetOwner(Owner);
+					Weapon->AttachToComponent(OwnerMesh, FAttachmentTransformRules::KeepRelativeTransform,  (TEXT("HandSocket")));
+					Weapon->SetActorHiddenInGame(true);
+				}
+			}
+		}
 	}
 }
 
-
-// Called every frame
-void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UCombatComponent::ToggleWeapon()
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	UE_LOG(LogTemp, Warning, TEXT("ToggleWeapon"));
 
 }
 
