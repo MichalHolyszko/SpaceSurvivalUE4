@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CharacterBase.h"
-#include "CombatComponent.h"
+#include "PlayerCombatComponent.h"
 #include "HealthComponent.h"
 #include "InventoryComponent.h"
 #include "QuestComponent.h"
@@ -50,7 +50,7 @@ ACharacterBase::ACharacterBase()
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 	
 	// Initialize Components
-	CombatComponent = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
+	PlayerCombatComponent = CreateDefaultSubobject<UPlayerCombatComponent>(TEXT("PlayerCombatComponent"));
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
 	QuestComponent = CreateDefaultSubobject<UQuestComponent>(TEXT("QuestComponent"));
@@ -99,15 +99,14 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterBase::Interaction);
 
-		if(CombatComponent != nullptr)
+		if(PlayerCombatComponent != nullptr)
 		{
-			PlayerInputComponent->BindAction("ToggleWeapon", IE_Pressed, CombatComponent, &UCombatComponent::ToggleWeapon);
-			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, CombatComponent, &UCombatComponent::MeleeAttack); 
+			PlayerInputComponent->BindAction("ToggleWeapon", IE_Pressed, PlayerCombatComponent, &UPlayerCombatComponent::ToggleWeapon);
+			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, PlayerCombatComponent, &UPlayerCombatComponent::MeleeAttack); 
 		}
 
 		if(InventoryComponent != nullptr){ PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory); }
 		if(QuestComponent != nullptr) { PlayerInputComponent->BindAction(TEXT("ToggleQuest"), IE_Pressed, QuestComponent, &UQuestComponent::ToggleQuest); }
-
 	}
 }
 

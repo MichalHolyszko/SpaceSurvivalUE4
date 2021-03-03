@@ -6,15 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "CombatComponent.generated.h"
 
-
- UENUM(BlueprintType)
- enum class EPlayerStatus : uint8 
- {
-	  Armed,
-	  Unarmed
- };
-
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SOMEGAME_API UCombatComponent : public UActorComponent
 {
@@ -29,9 +20,7 @@ public:
 	virtual void TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
 
 	// Called by Player to execute melle attack
-	virtual void MeleeAttack();
-
-	void ToggleWeapon();
+	void MeleeAttack();
 
 protected:
 
@@ -40,9 +29,6 @@ protected:
 
 	// HitResult - OUT param
 	bool SphereTrace(FHitResult &HitResult);
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	class UAIPerceptionStimuliSourceComponent* StimuliComponent;
 
 	// Character Damage Per Hit
 	UPROPERTY(EditAnywhere, Category = "Stats")
@@ -66,13 +52,4 @@ protected:
 
 	UPROPERTY()
 	class USkeletalMeshComponent* OwnerMesh;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	class TSubclassOf<class AWeapon> WeaponClass;
-
-	UPROPERTY()
-	class AWeapon* Weapon;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	EPlayerStatus PlayerStatus;
 };

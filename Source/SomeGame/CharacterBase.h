@@ -51,19 +51,6 @@ public:
 
 	void Interaction();
 
-private:
-
-	// Default Movement Speed
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	float NormalSpeed;
-
-	// Movement Speed when sprinting
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	float SprintSpeed;
-
-	UPROPERTY()
-	UCharacterMovementComponent* MovementComponent;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -81,13 +68,11 @@ protected:
 	// Called for Increase Character Movement Speed
 	void Sprint();
 
-	void ToggleWeapon();
-
 	// Remove Bindings from Movement and Melle Attack
 	void RemoveInputBindings();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	class UCombatComponent* CombatComponent;
+	class UPlayerCombatComponent* PlayerCombatComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UHealthComponent* HealthComponent;
@@ -97,4 +82,15 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UQuestComponent* QuestComponent;
+
+	// Default Movement Speed
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float NormalSpeed;
+
+	// Movement Speed when sprinting
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float SprintSpeed;
+
+	UPROPERTY()
+	UCharacterMovementComponent* MovementComponent;
 };
