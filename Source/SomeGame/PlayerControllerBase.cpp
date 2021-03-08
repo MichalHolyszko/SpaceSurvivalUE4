@@ -22,6 +22,18 @@ void APlayerControllerBase::BeginPlay()
     }
 }
 
+void APlayerControllerBase::TogglePause()
+{
+    if(PauseMenuClass != nullptr)
+    {
+        PauseMenu = CreateWidget(this, PauseMenuClass);
+        if(PauseMenu != nullptr)
+        {
+            PauseMenu->AddToViewport();
+        }
+    }
+}
+
 void APlayerControllerBase::PlayerKilled()
 {
     UE_LOG(LogTemp, Warning, TEXT("Controller: Player Death"));
@@ -29,5 +41,14 @@ void APlayerControllerBase::PlayerKilled()
      if(HUD != nullptr)
      {
         HUD->RemoveFromViewport();
+    }
+
+    if(LoseScreenClass != nullptr)
+    {
+        LoseScreen = CreateWidget(this, LoseScreenClass);
+        if(LoseScreen != nullptr)
+        {
+            LoseScreen->AddToViewport();
+        }
     }
 }

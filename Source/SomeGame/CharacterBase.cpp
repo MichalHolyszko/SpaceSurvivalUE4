@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CharacterBase.h"
+#include "PlayerControllerBase.h"
 #include "PlayerCombatComponent.h"
 #include "HealthComponent.h"
 #include "InventoryComponent.h"
@@ -98,6 +99,9 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		if(InventoryComponent != nullptr){ PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory); }
 		if(QuestComponent != nullptr) { PlayerInputComponent->BindAction(TEXT("ToggleQuest"), IE_Pressed, QuestComponent, &UQuestComponent::ToggleQuest); }
+
+		APlayerControllerBase* PlayerController = Cast<APlayerControllerBase>(GetController());
+		if(PlayerController != nullptr){ PlayerInputComponent->BindAction(TEXT("TogglePause"), IE_Pressed, PlayerController, &APlayerControllerBase::TogglePause); }
 	}
 }
 

@@ -20,6 +20,8 @@ public:
 
 	void PlayerKilled();
 
+	void TogglePause();
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -29,4 +31,22 @@ protected:
 
 	UPROPERTY()
 	class UUserWidget* HUD;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class TSubclassOf<UUserWidget> PauseMenuClass;
+
+	UPROPERTY()
+	class UUserWidget* PauseMenu;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class TSubclassOf<UUserWidget> LoseScreenClass;
+
+	UPROPERTY()
+	class UUserWidget* LoseScreen;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	class TSubclassOf<UUserWidget> WinScreenClass;
+
+	UPROPERTY()
+	class UUserWidget* WinScreen;
 };
