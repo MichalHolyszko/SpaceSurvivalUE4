@@ -79,4 +79,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UQuestComponent* QuestComponent;
+
+	UPROPERTY()
+	class APlayerControllerBase* PlayerController;
 };

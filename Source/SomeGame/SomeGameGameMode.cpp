@@ -7,8 +7,6 @@
 #include "EnemyAIController.h"
 #include "CharacterBase.h"
 #include "EngineUtils.h"
-#include "CharacterBase.h"
-#include "PlayerControllerBase.h"
 
 ASomeGameGameMode::ASomeGameGameMode()
 {
@@ -24,7 +22,6 @@ void ASomeGameGameMode::StartPlay()
     {
         PlayerPawn->OnPlayerKilled.AddDynamic(this, &ASomeGameGameMode::PlayerKilled);
     }
-
 }
 
 void ASomeGameGameMode::PlayerKilled()
@@ -36,12 +33,6 @@ void ASomeGameGameMode::PlayerKilled()
             Controller->SetEnemyStatus(EEnemyStatus::Patrol);
         }
     }
-    if(PlayerPawn != nullptr)
-    {
-        APlayerControllerBase* PlayerController = Cast<APlayerControllerBase>(PlayerPawn->GetController());
-        if(PlayerController != nullptr)
-        {
-            PlayerController->PlayerKilled();
-        }
-    }
 }
+
+

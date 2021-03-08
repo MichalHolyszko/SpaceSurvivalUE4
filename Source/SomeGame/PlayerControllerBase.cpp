@@ -12,43 +12,37 @@ void APlayerControllerBase::BeginPlay()
 {
     Super::BeginPlay();
 
-    if(HUDClass != nullptr)
-    {
-        HUD = CreateWidget(this, HUDClass);
-        if(HUD != nullptr)
-        {
-            HUD->AddToViewport();
-        }
-    }
+    AddWidgetToViewport(HUDClass);
 }
 
 void APlayerControllerBase::TogglePause()
 {
-    if(PauseMenuClass != nullptr)
-    {
-        PauseMenu = CreateWidget(this, PauseMenuClass);
-        if(PauseMenu != nullptr)
-        {
-            PauseMenu->AddToViewport();
-        }
-    }
+    AddWidgetToViewport(PauseMenuClass);
 }
 
 void APlayerControllerBase::PlayerKilled()
 {
     UE_LOG(LogTemp, Warning, TEXT("Controller: Player Death"));
 
-     if(HUD != nullptr)
-     {
-        HUD->RemoveFromViewport();
-    }
+    AddWidgetToViewport(LoseScreenClass);
+}
 
-    if(LoseScreenClass != nullptr)
+void APlayerControllerBase::PlayerEndGame()
+{
+     UE_LOG(LogTemp, Warning, TEXT("Controller: Player End Game"));
+
+    AddWidgetToViewport(WinScreenClass);
+}
+
+void APlayerControllerBase::AddWidgetToViewport(class TSubclassOf<UUserWidget> WidgetClass)
+{
+    if(WidgetClass != nullptr)
     {
-        LoseScreen = CreateWidget(this, LoseScreenClass);
-        if(LoseScreen != nullptr)
+        UUserWidget* Widget = CreateWidget(this, WidgetClass);
+        if(Widget != nullptr)
         {
-            LoseScreen->AddToViewport();
+            Widget->AddToViewport();
         }
     }
 }
+

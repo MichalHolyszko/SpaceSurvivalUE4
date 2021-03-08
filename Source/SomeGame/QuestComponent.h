@@ -19,6 +19,7 @@ struct FQuest
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnToggleQuestDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerEndGame);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SOMEGAME_API UQuestComponent : public UActorComponent
@@ -34,6 +35,11 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnToggleQuestDelegate OnToggleQuest;
 
+	void EndGame();
+
+	UPROPERTY()
+	FOnPlayerEndGame OnPlayerEndGame;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -43,4 +49,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector2D Position;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bAllQuestsCompleted;
 };

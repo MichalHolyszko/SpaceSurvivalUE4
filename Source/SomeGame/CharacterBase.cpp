@@ -66,6 +66,11 @@ void ACharacterBase::BeginPlay()
 	{
 		HealthComponent->OnDeath.AddDynamic(this, &ACharacterBase::HandleDeath);
 	}
+
+	if(PlayerController != nullptr)
+	{
+		QuestComponent->OnPlayerEndGame.AddDynamic(PlayerController, &APlayerControllerBase::PlayerEndGame);
+	}
 }
 
 // Called every frame
@@ -97,11 +102,22 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 			PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, PlayerCombatComponent, &UPlayerCombatComponent::MeleeAttack); 
 		}
 
-		if(InventoryComponent != nullptr){ PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory); }
-		if(QuestComponent != nullptr) { PlayerInputComponent->BindAction(TEXT("ToggleQuest"), IE_Pressed, QuestComponent, &UQuestComponent::ToggleQuest); }
+		if(InventoryComponent != nullptr)
+		{
+			 PlayerInputComponent->BindAction(TEXT("ToggleInventory"), IE_Pressed, InventoryComponent, &UInventoryComponent::ToggleInventory);
+	 	}
+		
+		if(QuestComponent != nullptr)
+		{
+			 PlayerInputComponent->BindAction(TEXT("ToggleQuest"), IE_Pressed, QuestComponent, &UQuestComponent::ToggleQuest);
+			 PlayerInputComponent->BindAction(TEXT("Finish"), IE_Pressed, QuestComponent, &UQuestComponent::EndGame);
+		}
 
-		APlayerControllerBase* PlayerController = Cast<APlayerControllerBase>(GetController());
-		if(PlayerController != nullptr){ PlayerInputComponent->BindAction(TEXT("TogglePause"), IE_Pressed, PlayerController, &APlayerControllerBase::TogglePause); }
+		PlayerController = Cast<APlayerControllerBase>(GetController());
+		if(PlayerController != nullptr)
+		{
+			PlayerInputComponent->BindAction(TEXT("TogglePause"), IE_Pressed, PlayerController, &APlayerControllerBase::TogglePause); 
+		}
 	}
 }
 
@@ -159,18 +175,28 @@ void ACharacterBase::Interaction()
 void ACharacterBase::HandleDeath()
 {
 	OnPlayerKilled.Broadcast();
-	
+
+	UE_LOG(LogTemp, Warning, TEXT("Player Death"));
 	RemoveInputBindings();
 	SetActorEnableCollision(false);
+
+    if(PlayerController != nullptr)
+    {
+        PlayerController->PlayerKilled();
+    }
 }
 
 void ACharacterBase::RemoveInputBindings()
 {
 	if(InputComponent != nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Death"));
+		InputComponent->RemoveActionBinding(TEXT("ToggleWeapon"), IE_Pressed);
 		InputComponent->RemoveActionBinding(TEXT("MeleeAttack"), IE_Pressed);
+		InputComponent->RemoveActionBinding(TEXT("Interact"), IE_Pressed);
 		InputComponent->RemoveActionBinding(TEXT("ToggleInventory"), IE_Pressed);
+		InputComponent->RemoveActionBinding(TEXT("ToggleQuest"), IE_Pressed);
+		InputComponent->RemoveActionBinding(TEXT("TogglePause"), IE_Pressed);
+		InputComponent->RemoveActionBinding(TEXT("ToggleFinish"), IE_Pressed);
 
 		for(int32 i = 0; i < InputComponent->AxisBindings.Num(); i++)
 		{
@@ -179,30 +205,4 @@ void ACharacterBase::RemoveInputBindings()
 	}
 }
 
-/* void ACharacterBase::Sprint()
-{
-	if(MovementComponent != nullptr)
-	{
-		if(MovementComponent->MaxWalkSpeed != SprintSpeed)
-		{
-			MovementComponent->MaxWalkSpeed = SprintSpeed;
-		}
-		else
-		{
-			MovementComponent->MaxWalkSpeed = NormalSpeed;
-		}
-	}
-} */
 
-
-/* PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
-PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint); */
-	
-/* InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Pressed);
-InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Released); */
-
-/* // Initialize variables
-NormalSpeed = 600.f;
-SprintSpeed = 1200.f; */
-
-//MovementComponent = GetCharacterMovement();
