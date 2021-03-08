@@ -54,18 +54,12 @@ ACharacterBase::ACharacterBase()
 	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
 	QuestComponent = CreateDefaultSubobject<UQuestComponent>(TEXT("QuestComponent"));
-
-	// Initialize variables
-	NormalSpeed = 600.f;
-	SprintSpeed = 1200.f;
 }
 
 // Called when the game starts or when spawned
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-
-	MovementComponent = GetCharacterMovement();
 
 	if(HealthComponent != nullptr)
 	{
@@ -93,9 +87,6 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 		PlayerInputComponent->BindAxis("MoveRight", this, &ACharacterBase::MoveRight);
 		PlayerInputComponent->BindAxis("MoveForward", this, &ACharacterBase::MoveForward);
-
-		PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
-		PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint);
 
 		PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACharacterBase::Interaction);
 
@@ -139,34 +130,26 @@ void ACharacterBase::MoveRight(float Value)
 	}
 }
 
-void ACharacterBase::Sprint()
-{
-	if(MovementComponent != nullptr)
-	{
-		if(MovementComponent->MaxWalkSpeed != SprintSpeed)
-		{
-			MovementComponent->MaxWalkSpeed = SprintSpeed;
-		}
-		else
-		{
-			MovementComponent->MaxWalkSpeed = NormalSpeed;
-		}
-	}
-}
-
 void ACharacterBase::Interaction()
 {
-	TArray<AActor*> OverlappingActors;
- 	GetOverlappingActors(OverlappingActors);
-
-	for(AActor* OverllapingActor : OverlappingActors)
+	if(PlayerCombatComponent != nullptr && PlayerCombatComponent->GetPlayerStatus() == EPlayerStatus::Armed)
 	{
-		if(OverllapingActor != nullptr && OverllapingActor->Implements<UInteractInterface>())
+		return;
+	}
+	else
+	{
+		TArray<AActor*> OverlappingActors;
+ 		GetOverlappingActors(OverlappingActors);
+
+		for(AActor* OverllapingActor : OverlappingActors)
 		{
-			IInteractInterface::Execute_Interact(OverllapingActor, this);
-			break;
-		}
-	} 
+			if(OverllapingActor != nullptr && OverllapingActor->Implements<UInteractInterface>())
+			{
+				IInteractInterface::Execute_Interact(OverllapingActor, this);
+				break;
+			}
+		} 
+	}
 }
 
 void ACharacterBase::HandleDeath()
@@ -185,9 +168,6 @@ void ACharacterBase::RemoveInputBindings()
 		InputComponent->RemoveActionBinding(TEXT("MeleeAttack"), IE_Pressed);
 		InputComponent->RemoveActionBinding(TEXT("ToggleInventory"), IE_Pressed);
 
-		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Released);
-
 		for(int32 i = 0; i < InputComponent->AxisBindings.Num(); i++)
 		{
 			InputComponent->AxisBindings.RemoveAt(i);
@@ -195,5 +175,30 @@ void ACharacterBase::RemoveInputBindings()
 	}
 }
 
+/* void ACharacterBase::Sprint()
+{
+	if(MovementComponent != nullptr)
+	{
+		if(MovementComponent->MaxWalkSpeed != SprintSpeed)
+		{
+			MovementComponent->MaxWalkSpeed = SprintSpeed;
+		}
+		else
+		{
+			MovementComponent->MaxWalkSpeed = NormalSpeed;
+		}
+	}
+} */
 
 
+/* PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACharacterBase::Sprint);
+PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACharacterBase::Sprint); */
+	
+/* InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Pressed);
+InputComponent->RemoveActionBinding(TEXT("Sprint"), IE_Released); */
+
+/* // Initialize variables
+NormalSpeed = 600.f;
+SprintSpeed = 1200.f; */
+
+//MovementComponent = GetCharacterMovement();

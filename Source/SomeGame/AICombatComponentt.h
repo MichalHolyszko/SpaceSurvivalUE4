@@ -27,5 +27,8 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	// HitResult - OUT param
+	virtual bool SphereTrace(FHitResult &HitResult) override;
 	
 };

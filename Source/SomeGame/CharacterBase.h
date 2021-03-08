@@ -65,9 +65,6 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
-	// Called for Increase Character Movement Speed
-	void Sprint();
-
 	// Remove Bindings from Movement and Melle Attack
 	void RemoveInputBindings();
 
@@ -82,15 +79,4 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	class UQuestComponent* QuestComponent;
-
-	// Default Movement Speed
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	float NormalSpeed;
-
-	// Movement Speed when sprinting
-	UPROPERTY(EditAnywhere, Category = "Movement")
-	float SprintSpeed;
-
-	UPROPERTY()
-	UCharacterMovementComponent* MovementComponent;
 };

@@ -26,8 +26,13 @@ public:
 
 	void ToggleWeapon();
 
+	// Called by Player to execute melle attack
+	virtual void MeleeAttack() override;
+
 	// Called By Anim Montage To Fire Sphere Trace
 	virtual void TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload) override;
+
+	EPlayerStatus GetPlayerStatus() const;
 
 protected:
 

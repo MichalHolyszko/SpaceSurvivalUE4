@@ -20,7 +20,7 @@ public:
 	virtual void TryToDealDamage(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
 
 	// Called by Player to execute melle attack
-	void MeleeAttack();
+	virtual void MeleeAttack();
 
 protected:
 
@@ -28,7 +28,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	// HitResult - OUT param
-	bool SphereTrace(FHitResult &HitResult);
+	virtual bool SphereTrace(FHitResult &HitResult);
 
 	// Character Damage Per Hit
 	UPROPERTY(EditAnywhere, Category = "Stats")
