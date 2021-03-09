@@ -20,17 +20,6 @@ void AItemBase::BeginPlay()
 	
 }
 
-void AItemBase::Interact_Implementation(AActor* OtherActor)
-{
-	if(OtherActor != nullptr)
-	{
-		if(AddToInventory(OtherActor, Quantity))
-		{
-			Destroy();
-		}
-	}
-}
-
 bool AItemBase::AddToInventory(AActor* InventoryOwner, int32 ItemQuantity)
 {
 	UInventoryComponent* Inventory = InventoryOwner->FindComponentByClass<UInventoryComponent>();
@@ -49,10 +38,7 @@ bool AItemBase::AddToInventory(AActor* InventoryOwner, int32 ItemQuantity)
 	}
 }
 
-void AItemBase::ToggleOverlapping_Implementation()
-{
-	ToggleWidget();
-}
+
 
 
 

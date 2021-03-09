@@ -73,6 +73,7 @@ void ACharacterBase::BeginPlay()
 	}
 
 	OnActorBeginOverlap.AddDynamic(this, &ACharacterBase::Overlapping);
+	OnActorEndOverlap.AddDynamic(this, &ACharacterBase::Overlapping);
 }
 
 // Called every frame
@@ -176,9 +177,9 @@ void ACharacterBase::Interaction()
 
 void ACharacterBase::Overlapping(AActor* OverlappedActor, AActor* OtherActor)
 {
-	if(OverlappedActor != nullptr && OverlappedActor->Implements<UInteractInterface>())
+	if(OtherActor != nullptr && OtherActor->Implements<UInteractInterface>())
 	{
-		IInteractInterface::Execute_ToggleOverlapping(OverlappedActor);
+		IInteractInterface::Execute_ToggleOverlapping(OtherActor);
 	}
 }
 
