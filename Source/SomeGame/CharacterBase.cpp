@@ -71,6 +71,8 @@ void ACharacterBase::BeginPlay()
 	{
 		QuestComponent->OnPlayerEndGame.AddDynamic(PlayerController, &APlayerControllerBase::PlayerEndGame);
 	}
+
+	OnActorBeginOverlap.AddDynamic(this, &ACharacterBase::Overlapping);
 }
 
 // Called every frame
@@ -169,6 +171,14 @@ void ACharacterBase::Interaction()
 				break;
 			}
 		} 
+	}
+}
+
+void ACharacterBase::Overlapping(AActor* OverlappedActor, AActor* OtherActor)
+{
+	if(OverlappedActor != nullptr && OverlappedActor->Implements<UInteractInterface>())
+	{
+		IInteractInterface::Execute_ToggleOverlapping(OverlappedActor);
 	}
 }
 

@@ -26,4 +26,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = " Interaction")
 	void Interact(AActor* OtherActor);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = " Interaction")
+	void ToggleOverlapping();
 };

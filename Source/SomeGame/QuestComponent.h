@@ -50,6 +50,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector2D Position;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bAllQuestsCompleted;
 };

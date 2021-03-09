@@ -49,4 +49,11 @@ bool AItemBase::AddToInventory(AActor* InventoryOwner, int32 ItemQuantity)
 	}
 }
 
+void AItemBase::ToggleOverlapping_Implementation()
+{
+	ToggleWidget();
+}
+
+
+
 

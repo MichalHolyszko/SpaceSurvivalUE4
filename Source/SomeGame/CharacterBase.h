@@ -51,6 +51,9 @@ public:
 
 	void Interaction();
 
+	UFUNCTION()
+	void Overlapping(AActor* OverlappedActor, AActor* OtherActor);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

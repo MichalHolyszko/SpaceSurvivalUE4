@@ -51,10 +51,15 @@ public:
 
 	virtual void Interact_Implementation(AActor* OtherActor) override;
 
+	virtual void ToggleOverlapping_Implementation() override;
+
 	bool AddToInventory(AActor* InventoryOwner, int32 ItemQuantity);
 
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void UseItem();
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void ToggleWidget();
 
 protected:
 
