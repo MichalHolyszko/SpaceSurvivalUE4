@@ -41,7 +41,6 @@ void AItemInteractable::ToggleOverlapping_Implementation()
 {
     if(WidgetComponent != nullptr)
     {
-        UE_LOG(LogTemp, Error, TEXT("ToggleWidget"));
         if(WidgetComponent->GetUserWidgetObject()->IsVisible())
 		{
 			WidgetComponent->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Hidden);
