@@ -6,9 +6,6 @@
 #include "CombatComponent.h"
 #include "AICombatComponentt.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SOMEGAME_API UAICombatComponentt : public UCombatComponent
 {
@@ -25,10 +22,10 @@ public:
 	float GetAttackRange() const;
 
 protected:
+
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	// HitResult - OUT param
 	virtual bool SphereTrace(FHitResult &HitResult) override;
-	
 };

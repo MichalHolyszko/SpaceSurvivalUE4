@@ -50,13 +50,19 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RefreshInventorySlot(int32 Index);
 
-	// Called when after Use Item
+	// Called when Player toggle quest window
 	UFUNCTION(BlueprintCallable)
 	bool InventoryQuery(TSubclassOf<AItemBase> ItemClass, int32 QueryAmmount);
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	void PrepareInventory();
+
+	bool CreateStack(const FSlot &ContentToAdd);
+
+	bool AddStackable(const FSlot &ContentToAdd);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Name;
@@ -69,10 +75,4 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector2D Position;
-
-	void PrepareInventory();
-
-	bool CreateStack(const FSlot &ContentToAdd);
-
-	bool AddStackable(const FSlot &ContentToAdd);
 };

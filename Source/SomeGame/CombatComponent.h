@@ -49,7 +49,7 @@ protected:
 	// Need this to fire sphere trace
 	UPROPERTY()
 	TArray<AActor*> ActorsToIgnore;
-
+	
 	UPROPERTY()
 	class USkeletalMeshComponent* OwnerMesh;
 };

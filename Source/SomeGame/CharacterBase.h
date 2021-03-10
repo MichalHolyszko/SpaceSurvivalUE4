@@ -43,18 +43,23 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	// Called when Player Die
 	UFUNCTION()
 	void HandleDeath();
 
-	UPROPERTY()
-	FOnPlayerKilledDelegate OnPlayerKilled;
-
-	void Interaction();
-
+	// Called when Player overlap Interactable Item
 	UFUNCTION()
 	void Overlapping(AActor* OverlappedActor, AActor* OtherActor);
 
+	// Called when Player want to Interact with something
+	void Interaction();
+
+	// Event to handle Player death
+	UPROPERTY()
+	FOnPlayerKilledDelegate OnPlayerKilled;
+
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

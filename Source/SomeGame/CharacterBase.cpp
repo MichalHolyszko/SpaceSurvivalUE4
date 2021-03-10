@@ -187,33 +187,15 @@ void ACharacterBase::HandleDeath()
 {
 	OnPlayerKilled.Broadcast();
 
-	UE_LOG(LogTemp, Warning, TEXT("Player Death"));
-	RemoveInputBindings();
-	SetActorEnableCollision(false);
-
-    if(PlayerController != nullptr)
+	if(PlayerController != nullptr)
     {
         PlayerController->PlayerKilled();
     }
+	
+	DetachFromControllerPendingDestroy();
+	SetActorEnableCollision(false);
 }
 
-void ACharacterBase::RemoveInputBindings()
-{
-	if(InputComponent != nullptr)
-	{
-		InputComponent->RemoveActionBinding(TEXT("ToggleWeapon"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("MeleeAttack"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("Interact"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("ToggleInventory"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("ToggleQuest"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("TogglePause"), IE_Pressed);
-		InputComponent->RemoveActionBinding(TEXT("ToggleFinish"), IE_Pressed);
 
-		for(int32 i = 0; i < InputComponent->AxisBindings.Num(); i++)
-		{
-			InputComponent->AxisBindings.RemoveAt(i);
-		}
-	}
-}
 
 

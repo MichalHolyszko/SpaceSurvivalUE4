@@ -46,6 +46,7 @@ class SOMEGAME_API AItemBase : public AActor
 	GENERATED_BODY()
 	
 public:	
+
 	// Sets default values for this actor's properties
 	AItemBase();
 
@@ -56,12 +57,14 @@ public:
 
 protected:
 
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FItem ItemStruct;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Quantity;
 
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	
 };
